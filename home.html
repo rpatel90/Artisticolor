@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" and dir="Itr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/lgnregBox.css">
+
+    <script defer src="../js/home.js"></script>
+    <script src="../js/login.js"></script>
+    
+    <title>Home</title>
+</head>
+<body>
+    <header class="bar">
+        <h1 class="webname">Artisticolor</h1>
+        
+        <!--Nav bar-->
+        <nav id="navigation">
+            <a href="../html/home.html">Home</a>
+            <a href="../html/projects.html">Projects</a>
+            <a href="../html/account.html">Profile</a>
+            <button id="lgnButton" class="btnLogin">Login</button>
+        </nav>
+    </header>
+
+    <div id="wrapper">
+        <form class="login-box" onsubmit="login(); return false;">
+            <h1>Login</h1>
+            
+            <button id="close"><img src="../icons/close.png" alt="close" height="35px"></button>
+
+            <!--Enter email & password-->
+            <input type="email" name="em" placeholder="Email" id="email" autocomplete="email">
+            <input type="password" name="passwd" placeholder="Password" id="password" autocomplete="current-password">
+            
+            <p id="message"></p>
+
+            <input type="submit" name="lgn" value="Login &#8594;">
+
+            <p>Don't have an account? <a href="../html/register.html">Register</a></p>    
+        </form>
+    </div>
+</body>
+</html>
