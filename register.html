@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" and dir="Itr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../css/lgnregBox.css">
+    <style>
+        body {
+            background-image: url(../back.png);
+            background-size: cover;    
+        }
+    </style>
+
+    <script type="module" src="../js/register.js"></script>
+
+    <title>Sign Up</title>
+</head>
+<body>
+    <form class="login-box" onsubmit="return false">
+        <h1>Sign Up</h1>
+        
+        <!--Enter email, username, password-->
+        <input type="email" name="em" placeholder="Email" id="email" required autocomplete="email">
+        <input type="text" name="usr" placeholder="Username" id="username" required autocomplete="username">
+        <input type="password" name="passwd" placeholder="Password" id="password" required autocomplete="current-password">
+
+        <p id="message"></p>
+        
+        <button id="submit" type="submit" name="sgnup">Create Account</button>
+
+        <p>Already have an account? <a href="../html/home.html">Login</a></p>
+    </form>
+</body>
+</html>
