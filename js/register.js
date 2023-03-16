@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js'
-import { getDatabase, ref, set, onValue } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js'
+import { getDatabase, ref, set, get, child, onValue } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js'
 
 const firebaseConfig = {
     apiKey: "AIzaSyC0AlemsEruFplUQFL5DVRg6oQtmfrhz_I",
@@ -13,17 +13,27 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getDatabase()
-
+const database = getDatabase();
+const databaseRef = ref(database);
 
 function writeUserLoginData(userId, username, email, password) {
-
+	//Set user login properties
 	set(ref(db, 'Users/User ' + userId + '/Login Info'), {
 	  	Username: username,
 	  	Email: email,
 	  	Password: password
 	});
 }
+
+get(child(databaseRef, 'Users/User 0/Login Info')).then((snapshot) => {
+	if(snapshot.exists()) {
+		console.log(val());
+	} else {
+		//console.log('No data available')
+	}
+});
+
+	
 
 
 //----------Register----------------------------------------------------------------------------------------
@@ -38,9 +48,9 @@ document.getElementById('submit').addEventListener('click', function(){
 	//Store information about the user
 	let UserInfo = {
 		lgnInfo: {
-			email: "",
-			username: "",
-			password: ""
+			email,
+			username,
+			password
 		},
 	};
 
@@ -55,13 +65,8 @@ document.getElementById('submit').addEventListener('click', function(){
 	UserInfo.lgnInfo.email = email.value;
 	UserInfo.lgnInfo.password = password.value;
 
-	
-
 	//Stringify user data
 	const strUserInfo = JSON.stringify(UserInfo);
-
-	//Store localStorage length property
-	const lsLength = localStorage.length;
 	
 	//Check if User0 exists
 	let validator = JSON.parse(localStorage.getItem('User0 Data'));
@@ -69,59 +74,22 @@ document.getElementById('submit').addEventListener('click', function(){
 	//Get message element
 	let message = document.getElementById('message');
 
-	//If User0 doesn't exist, add User0 to localStorage
-	if(validator == null) {
-		writeUserLoginData(
-			'0',
-			UserInfo.lgnInfo.username,
-			UserInfo.lgnInfo.email,
-			UserInfo.lgnInfo.password
-		)
+	//If User0 doesn't exist, add User0 to database
+	console.log(get(child(databaseRef, 'Users')))
 
-		//Redirect user to login page
-		//location.href = "../html/home.html";
-	} else { //If it does exist then check if registered data is already in use
-		for(let i=0; i<lsLength; i++) {
-			//Fetch User Data from localStorage
-			/*
-			let validator = JSON.parse(localStorage.getItem('User'+i+' Data'));				
-
-			if(UserInfo.lgnInfo.email == validator.lgnInfo.email) {
-				//Give message to the user if email has already been registered
-				message.innerHTML = 'That email has already been registered. Please pick another one.';
-				
-				//Add shake animation to email box
-				email.classList.add('error');
-				setTimeout(function() {
-					email.classList.remove('error');
-				}, 500);
-				
-				//Stop all
-				return;
-			} else if(UserInfo.lgnInfo.username == validator.lgnInfo.username) {
-				//Give message to user if username has been taken
-				message.innerHTML = 'That username has been taken. Please choose another.';
-				
-				//Add shake animation to username box
-				username.classList.add('error');
-				setTimeout(function() {
-					username.classList.remove('error');
-				}, 500);
-				
-				//Stop all
-				return;
-			}*/
-			
-			/*
-			//Set message to blank
-			message.innerHTML = '';
-			
-			//Redirect user to login page
-			location.href = "login.html";
-			*/
-
-			//Stop all
-			return;
-		}
-	}
 });
+	/*
+
+email.classList.add('error');
+setTimeout(function() {
+	email.classList.remove('error');
+}, 500);
+
+writeUserLoginData(
+	'0',
+	UserInfo.lgnInfo.username,
+	UserInfo.lgnInfo.email,
+	UserInfo.lgnInfo.password
+)
+
+*/
