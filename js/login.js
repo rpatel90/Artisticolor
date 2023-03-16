@@ -1,113 +1,79 @@
-function login() {
-    
-    //User login info
-    let loginInfo = {
-		email: "",
-        password: ""
-    };
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js';
+import { getDatabase, ref, set, get, child, update } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js'
 
-    //Hashes User lgn info
-	async function hashPassword(input) {
-		const encoder = new TextEncoder();
-		const data = encoder.encode(input);
-		const hash = await crypto.subtle.digest('SHA-256', data);
-		return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-	}
-	
-	//Add hashed login data to UserInfo.lgnInfo
-	const em = document.getElementById('email').value;
-	hashPassword(em).then(hash => {
-		loginInfo.email = hash;
-	});
-	//Add hashed login data to UserInfo.lgnInfo
-	const pw = document.getElementById('password').value;
-	hashPassword(pw).then(hash => {
-		loginInfo.password = hash;
-	});
+const firebaseConfig = {
+    apiKey: "AIzaSyC0AlemsEruFplUQFL5DVRg6oQtmfrhz_I",
+    authDomain: "artisticolor-a55cf.firebaseapp.com",
+    databaseURL: "https://artisticolor-a55cf-default-rtdb.firebaseio.com",
+    projectId: "artisticolor-a55cf",
+    storageBucket: "artisticolor-a55cf.appspot.com",
+    messagingSenderId: "777420719697",
+    appId: "1:777420719697:web:55131e8a4f5144f1891a70",
+    measurementId: "G-JZ1H6Y93YL"
+};
 
-    setTimeout(function() {
-		//Store localStorage length property
-		const lsLength = localStorage.length;
-        
+const app = initializeApp(firebaseConfig);
+const database = getDatabase();
+const databaseRef = ref(database);
+const auth = getAuth();
+const user = auth.currentUser;
+
+//Get the email and password input boxes
+const email = document.getElementById('email').value;
+const password = document.getElementById('password').value;
+/*
+//Add event listener to login button if user is not logged in
+if(document.getElementById('lgnButton').innerHTML != 'Login') {
+    document.getElementById('login').addEventListener('click', function() {
         //Get message element
         let message = document.getElementById('message');
-
-        //Get the email and password input boxes
-        const email = document.getElementById('email');
-        const password = document.getElementById('password');
-
-        //If there are no users, output "Incorrect email or password"
-        if(localStorage.getItem('User0 Data') == null) {
-            message.innerHTML = 'Incorrect email or password.';
-                
-            //Shake input boxes
-            email.classList.add('error');
-            password.classList.add('error');
-            setTimeout(function() {
-                email.classList.remove('error');
-                password.classList.remove('error');
-            }, 500);
-                    
-            //Stop all
-            return;
-        }
-
-        //Check is user input match stored account data
-        for(let i=0; i<lsLength; i++) {
-            //Get the data of every single user
-            let lgnvalidator = JSON.parse(localStorage.getItem('User'+i+' Data'));
+    
+        signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
             
-            //If the entered email matches with the stored email
-            if(loginInfo.email == lgnvalidator.lgnInfo.email) {
-                //If entered password matches sotred password
-                if(loginInfo.password == lgnvalidator.lgnInfo.password) {
-
-                    //Get navigation and login button elements
-                    let navBar = document.getElementById('navigation');
-                    let btnElement = document.getElementById('lgnButton')
-                    
-                    //Create am, "a" element and set the link property to profile page
-                    let aElement = document.createElement('a');
-                    aElement.setAttribute('href', '../html/profile.html');
-                    
-                    //Replace login button with username
-                    btnElement.remove();
-                    navBar.appendChild(aElement);
-                    aElement.innerHTML = lgnvalidator.lgnInfo.username;
-                    document.getElementById('wrapper').classList.remove('popup');
-                    message.innerHTML = '';
-
-                    
-                    
-                    return;
-                } else {
-                    message.innerHTML = 'Incorrect email or password.';
-                    
-                    //Shake input boxes
-                    email.classList.add('error');
-                    password.classList.add('error');
-                    setTimeout(function() {
-                        email.classList.remove('error');
-                        password.classList.remove('error');
-                    }, 500);
-                    
-                    //Stop all
-                    return;
-                }
-            } else {
-                message.innerHTML = 'Incorrect email or password.';
-                
-                //Shake input boxes
-                email.classList.add('error');
-                password.classList.add('error');
-                setTimeout(function() {
-                    email.classList.remove('error');
-                    password.classList.remove('error');
-                }, 500);
-
-                //Stop all
-                return;
+            const user = userCredential.user;
+            const dt = new Date();
+    
+            update(ref(database), 'Users/' + user.uid), {
+                last_login: dt
             }
-        }
-    }, 10);
-};
+            
+            get(child(databaseRef, 'Users/' + user.uid + '/Username')).then((uname) => {
+                alert('Welcome' + uname);
+            });
+            
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error(error)
+        });
+    });
+}*/
+
+document.getElementById('login').addEventListener('click', function() {
+    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+      // Signed in 
+      const userC = userCredential.user;
+      console.log(userC)
+    }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+    });
+});
+
+onAuthStateChanged(auth, (user) => {
+    if(user) {
+        //get unique user id of logged in user
+        const uid = user.uid;
+        
+        //Display the user's username in top right
+        get(child(databaseRef, 'Users/' + uid + '/Username')).then((uname) => {
+            console.log(uname)
+            //Get user's username value
+            const username = uname._node.value_
+            document.getElementById('lgnButton').innerHTML = username;
+        });
+    } else {
+
+    }
+});

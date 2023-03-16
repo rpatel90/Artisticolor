@@ -1,6 +1,9 @@
 body {
     font-family: sans-serif;
 }
+h1 {
+    color: rgba(175, 0, 215, 0.751);
+}
 
 header {
     text-align: center;
@@ -51,12 +54,22 @@ header {
 #emIcon {
     height: 25px;
     position: absolute;
-    top: 352.5px;
-    right: 575px;
+    top: 295.5px;
+    right: 630px;
 }
 #unIcon {
     height: 25px;
     position: absolute;
     top: 464.5px;
     right: 575px;
+}
+
+
+#logout {
+    margin-top: 10px;
+    width: 120px;
+    height: 35px;
+    border-radius: 18px;
+    background-color: rgb(223, 0, 0);
+    font-size: 20px;
 }

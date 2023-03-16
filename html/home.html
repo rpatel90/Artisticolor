@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="../css/home.css">
     <link rel="stylesheet" href="../css/lgnregBox.css">
 
-    <script defer src="../js/home.js"></script>
-    <script src="../js/login.js"></script>
+    <script type="module" defer src="../js/home.js"></script>
+    <script type="module" src="../js/login.js"></script>
     
     <title>Home</title>
 </head>
@@ -20,13 +20,13 @@
         <nav id="navigation">
             <a href="../html/home.html">Home</a>
             <a href="../html/projects.html">Projects</a>
-            <a href="../html/account.html">Profile</a>
+            <a href="../html/profile.html">Profile</a>
             <button id="lgnButton" class="btnLogin">Login</button>
         </nav>
     </header>
 
     <div id="wrapper">
-        <form class="login-box" onsubmit="login(); return false;">
+        <form class="login-box" onsubmit="return false;">
             <h1>Login</h1>
             
             <button id="close"><img src="../icons/close.png" alt="close" height="35px"></button>
@@ -37,7 +37,7 @@
             
             <p id="message"></p>
 
-            <input type="submit" name="lgn" value="Login &#8594;">
+            <button id="login" type="submit">Login &#8594;</button>
 
             <p>Don't have an account? <a href="../html/register.html">Register</a></p>    
         </form>

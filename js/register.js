@@ -1,5 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js'
-import { getDatabase, ref, set, get, child, onValue } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js'
+import { getDatabase, ref, set, get, child } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js'
+import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js'
 
 const firebaseConfig = {
     apiKey: "AIzaSyC0AlemsEruFplUQFL5DVRg6oQtmfrhz_I",
@@ -13,69 +14,49 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const database = getDatabase();
+const database = getDatabase(app);
 const databaseRef = ref(database);
-
-function writeUserLoginData(userId, username, email, password) {
-	//Set user login properties
-	set(ref(db, 'Users/User ' + userId + '/Login Info'), {
-	  	Username: username,
-	  	Email: email,
-	  	Password: password
-	});
-}
-
-get(child(databaseRef, 'Users/User 0/Login Info')).then((snapshot) => {
-	if(snapshot.exists()) {
-		console.log(val());
-	} else {
-		//console.log('No data available')
-	}
-});
-
-	
-
+const auth = getAuth(app);
+const currentuser = auth.currentUser;
 
 //----------Register----------------------------------------------------------------------------------------
 
-//Get email, username, & password boxes
-const email = document.getElementById('email');
-const username = document.getElementById('username');
-const password = document.getElementById('password');
-
 document.getElementById('submit').addEventListener('click', function(){
 
-	//Store information about the user
-	let UserInfo = {
-		lgnInfo: {
-			email,
-			username,
-			password
-		},
-	};
-
-	//Check if username is too big
-	if(username.value.length > 20) {
-		message.innerHTML = 'Username cannot exceed 20 characters';
-		return;
-	}
-
-	//Add inputted values to UserInfo
-	UserInfo.lgnInfo.username = username.value;
-	UserInfo.lgnInfo.email = email.value;
-	UserInfo.lgnInfo.password = password.value;
-
-	//Stringify user data
-	const strUserInfo = JSON.stringify(UserInfo);
-	
-	//Check if User0 exists
-	let validator = JSON.parse(localStorage.getItem('User0 Data'));
+	//Get email, username, & password boxes
+	const email = document.getElementById('email').value;
+	const username = document.getElementById('username').value;
+	const password = document.getElementById('password').value;
 
 	//Get message element
 	let message = document.getElementById('message');
 
-	//If User0 doesn't exist, add User0 to database
-	console.log(get(child(databaseRef, 'Users')))
+	//Check if username is too big
+	if(username == null) {
+		return
+	}
+	if(username.length > 20) {
+		message.innerHTML = 'Username cannot exceed 20 characters';
+		return;
+	}
+
+	createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+		const user = userCredential.user;
+		console.log(currentuser)
+
+		set(ref(database, 'Users/' + user.uid), {
+			Username: username,
+			Email: email,
+			Password: password,
+		})
+		
+		location.href = 'home.html'
+	}).catch((error) => {
+		const errorcode = error.code
+		const errorMessage = error.message
+
+		message.innerHTML = errorMessage;
+	})
 
 });
 	/*
