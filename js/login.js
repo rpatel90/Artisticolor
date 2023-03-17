@@ -17,44 +17,18 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 const databaseRef = ref(database);
 const auth = getAuth();
-const user = auth.currentUser;
 
 //Get the email and password input boxes
 const email = document.getElementById('email').value;
 const password = document.getElementById('password').value;
-/*
-//Add event listener to login button if user is not logged in
-if(document.getElementById('lgnButton').innerHTML != 'Login') {
-    document.getElementById('login').addEventListener('click', function() {
-        //Get message element
-        let message = document.getElementById('message');
-    
-        signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-            
-            const user = userCredential.user;
-            const dt = new Date();
-    
-            update(ref(database), 'Users/' + user.uid), {
-                last_login: dt
-            }
-            
-            get(child(databaseRef, 'Users/' + user.uid + '/Username')).then((uname) => {
-                alert('Welcome' + uname);
-            });
-            
-        }).catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error(error)
-        });
-    });
-}*/
 
+//Sign in user when login button is pressed
 document.getElementById('login').addEventListener('click', function() {
     signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
       // Signed in 
-      const userC = userCredential.user;
-      console.log(userC)
+      const user = userCredential.user;
+      
+      //console.log(userC)
     }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -62,17 +36,26 @@ document.getElementById('login').addEventListener('click', function() {
 });
 
 onAuthStateChanged(auth, (user) => {
-    if(user) {
-        //get unique user id of logged in user
-        const uid = user.uid;
+    if(user) { 
+        //Get unique user id from database
+        const uid = user.uid
+
+        const loginBtn = document.getElementById('lgnButton')
+
+        const navBar = document.getElementById('navigation')
         
-        //Display the user's username in top right
+        const pElement = document.createElement('p')
+        pElement.setAttribute('id', 'displayName')
+
+        //Go to the current user in database and get username value and display it in top right
         get(child(databaseRef, 'Users/' + uid + '/Username')).then((uname) => {
-            console.log(uname)
-            //Get user's username value
-            const username = uname._node.value_
-            document.getElementById('lgnButton').innerHTML = username;
+            user.displayName = uname._node.value_;
+            pElement.innerHTML = user.displayName;
+            navBar.appendChild(pElement)
         });
+
+        loginBtn.remove()
+        
     } else {
 
     }

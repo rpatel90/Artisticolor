@@ -17,7 +17,6 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const databaseRef = ref(database);
 const auth = getAuth(app);
-const currentuser = auth.currentUser;
 
 //----------Register----------------------------------------------------------------------------------------
 
@@ -40,9 +39,11 @@ document.getElementById('submit').addEventListener('click', function(){
 		return;
 	}
 
+	//Create a user and add user to database
 	createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+		
 		const user = userCredential.user;
-		console.log(currentuser)
+		user.displayName = username
 
 		set(ref(database, 'Users/' + user.uid), {
 			Username: username,
@@ -50,7 +51,7 @@ document.getElementById('submit').addEventListener('click', function(){
 			Password: password,
 		})
 		
-		location.href = 'home.html'
+		//location.href = 'home.html'
 	}).catch((error) => {
 		const errorcode = error.code
 		const errorMessage = error.message
