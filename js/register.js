@@ -45,11 +45,15 @@ document.getElementById('submit').addEventListener('click', function(){
 		const user = userCredential.user;
 		user.displayName = username
 
+		const dt = new Date();
+		const date = JSON.stringify(dt);
+
 		set(ref(database, 'Users/' + user.uid), {
 			Username: username,
 			Email: email,
 			Password: password,
-		})
+			Last_login: date
+		});
 		
 		//location.href = 'home.html'
 	}).catch((error) => {
@@ -57,7 +61,7 @@ document.getElementById('submit').addEventListener('click', function(){
 		const errorMessage = error.message
 
 		message.innerHTML = errorMessage;
-	})
+	});
 
 });
 	/*

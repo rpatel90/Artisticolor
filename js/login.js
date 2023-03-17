@@ -24,7 +24,7 @@ const password = document.getElementById('password').value;
 
 //Sign in user when login button is pressed
 document.getElementById('login').addEventListener('click', function() {
-    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+    signInWithEmailAndPassword(email, password).then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
       
@@ -32,6 +32,7 @@ document.getElementById('login').addEventListener('click', function() {
     }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.error(error)
     });
 });
 
@@ -50,11 +51,11 @@ onAuthStateChanged(auth, (user) => {
         //Go to the current user in database and get username value and display it in top right
         get(child(databaseRef, 'Users/' + uid + '/Username')).then((uname) => {
             user.displayName = uname._node.value_;
+            loginBtn.remove()
             pElement.innerHTML = user.displayName;
             navBar.appendChild(pElement)
         });
-
-        loginBtn.remove()
+        
         
     } else {
 
