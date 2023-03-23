@@ -1,26 +1,30 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js'
-import { getDatabase, ref, set, get, child } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js'
-import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js'
+import { //Firebase variables
+	firebaseConfig,
+	app,
+	database,
+	databaseRef,
+	auth,
+} from './firebaseConfig.js';
+import { // Firebase functions
+	initializeApp,
+    getDatabase,
+    ref,
+    set,
+    get,
+    child,
+    getAuth,
+    onAuthStateChanged,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    updateProfile
+} from './firebaseConfig.js';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyC0AlemsEruFplUQFL5DVRg6oQtmfrhz_I",
-    authDomain: "artisticolor-a55cf.firebaseapp.com",
-    databaseURL: "https://artisticolor-a55cf-default-rtdb.firebaseio.com",
-    projectId: "artisticolor-a55cf",
-    storageBucket: "artisticolor-a55cf.appspot.com",
-    messagingSenderId: "777420719697",
-    appId: "1:777420719697:web:55131e8a4f5144f1891a70",
-    measurementId: "G-JZ1H6Y93YL"
-};
 
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-const databaseRef = ref(database);
-const auth = getAuth(app);
+document.getElementById('login-box').style.transform = 'scale(1)';
+document.getElementById('login-box').style.transition = '0s';
+document.getElementById('login-box').style.top = '0px';
 
-//----------Register----------------------------------------------------------------------------------------
-
-document.getElementById('submit').addEventListener('click', function(){
+document.getElementById('submit').addEventListener('click', function() {
 
 	//Get email, username, & password boxes
 	const email = document.getElementById('email').value;
@@ -28,13 +32,13 @@ document.getElementById('submit').addEventListener('click', function(){
 	const password = document.getElementById('password').value;
 
 	//Get message element
-	let message = document.getElementById('message');
+	const message = document.getElementById('message');
 
 	//Check if username is too big
-	if(username == null) {
-		return
+	if(email == '' || username == '' || password == '') {
+		return;
 	}
-	if(username.length > 20) {
+	if(username.length > 15) {
 		message.innerHTML = 'Username cannot exceed 20 characters';
 		return;
 	}
@@ -43,39 +47,65 @@ document.getElementById('submit').addEventListener('click', function(){
 	createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
 		
 		const user = userCredential.user;
-		user.displayName = username
+		const uid = user.uid;
+		
+		const lastLogin = JSON.stringify(user.metadata.lastSignInTime)
 
-		const dt = new Date();
-		const date = JSON.stringify(dt);
-
-		set(ref(database, 'Users/' + user.uid), {
+		updateProfile(user, {
+			displayName: username
+		});
+		set(ref(database, `Users/${uid}`), {
 			Username: username,
 			Email: email,
 			Password: password,
-			Last_login: date
+			Last_Login: lastLogin,
 		});
 		
-		//location.href = 'home.html'
+		location.href = './home.html'
 	}).catch((error) => {
 		const errorcode = error.code
 		const errorMessage = error.message
 
-		message.innerHTML = errorMessage;
+		if(errorcode == 'auth/invalid-email') {
+			message.innerHTML = 'Invalid email'
+		}
+		if(errorcode == 'auth/weak-password') {
+			message.innerHTML = 'Password should be at least 6 characters'
+		}
 	});
 
 });
-	/*
 
-email.classList.add('error');
-setTimeout(function() {
-	email.classList.remove('error');
-}, 500);
-
-writeUserLoginData(
-	'0',
-	UserInfo.lgnInfo.username,
-	UserInfo.lgnInfo.email,
-	UserInfo.lgnInfo.password
-)
-
-*/
+//Move the label up when the input box is selected
+document.getElementById('email').addEventListener('focus', function() {
+    document.getElementById('emailLabel').style.transform = 'translateY(-200%)';
+    document.getElementById('emailLabel').style.transition = '0.25s';
+    
+	if(document.getElementById('username').value == '') {
+        document.getElementById('usernameLabel').style.transform = 'translateY(-50%)';
+    }
+	if(document.getElementById('password').value == '') {
+        document.getElementById('passwordLabel').style.transform = 'translateY(-50%)';
+    }  
+});
+document.getElementById('username').addEventListener('focus', function() {
+    document.getElementById('usernameLabel').style.transform = 'translateY(-200%)';
+    document.getElementById('usernameLabel').style.transition = '0.25s';
+    
+	if(document.getElementById('email').value == '') {
+        document.getElementById('emailLabel').style.transform = 'translateY(-50%)';
+    }
+	if(document.getElementById('password').value == '') {
+        document.getElementById('passwordLabel').style.transform = 'translateY(-50%)';
+    }  
+});
+document.getElementById('password').addEventListener('focus', function() {
+    document.getElementById('passwordLabel').style.transform = 'translateY(-200%)';
+    document.getElementById('passwordLabel').style.transition = '0.25s';
+    if(document.getElementById('email').value == '') {
+        document.getElementById('emailLabel').style.transform = 'translateY(-50%)';
+    }
+	if(document.getElementById('username').value == '') {
+        document.getElementById('usernameLabel').style.transform = 'translateY(-50%)';
+    }
+});

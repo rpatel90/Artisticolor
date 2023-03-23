@@ -14,18 +14,29 @@
     </style>
 
     <script type="module" src="../js/register.js"></script>
+    <script type="module" src="../js/firebaseConfig.js"></script>
 
     <title>Sign Up</title>
 </head>
 <body>
-    <form class="login-box" onsubmit="return false">
+    <form id="login-box" onsubmit="return false">
         <h1>Sign Up</h1>
         
         <!--Enter email, username, password-->
-        <input type="email" name="em" placeholder="Email" id="email" required autocomplete="email">
-        <input type="text" name="usr" placeholder="Username" id="username" required autocomplete="username">
-        <input type="password" name="passwd" placeholder="Password" id="password" required autocomplete="current-password">
+        <div class="email wraps">
+            <label id="emailLabel">Email</label>
+            <input type="email" name="em" id="email" required autocomplete="email">
+        </div>
+        
+        <div class="username wraps">
+            <label id="usernameLabel">Username</label>
+            <input type="text" name="usr" id="username" required autocomplete="username">
+        </div>
 
+        <div class="password wraps">
+            <label id="passwordLabel">Password</label>
+            <input type="password" name="passwd" id="password" required autocomplete="current-password">
+        </div>
         <p id="message"></p>
         
         <button id="submit" type="submit" name="sgnup">Create Account</button>

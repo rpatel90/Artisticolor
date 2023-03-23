@@ -1,41 +1,40 @@
-.login-box {
+#login-box {
     font-family: sans-serif;
-    opacity: 0.9;
     width: 350px;
+    height: 450px;
     padding: 30px;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(90deg, rgb(92, 95, 255), rgb(154, 188, 247));
     text-align: center;
-    border-radius: 40px;
+    background: linear-gradient(90deg, rgb(92, 95, 255), rgb(154, 188, 247));
+    border-radius: 20px;
+    transform: scale(0);
+    transition: 0.2s;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50px;
+    bottom: 0;
+    margin: auto;
+    z-index: 2;
 }
-.login-box h1 {
+
+#login-box h1 {
     color: rgb(150, 40, 240);
     font-size: 35px;
     text-transform: uppercase;
     font-weight: 700;
 }
-.login-box input[type="email"], .login-box input[type="text"], .login-box input[type="password"] {
-    border: 0;
-    background: lightgray;
-    display: block;
-    margin: 30px auto;
-    text-align: center;
+#email, #username, #password {
+    background: transparent;
     font-size: large;
-    border: 3px solid none;
+    border: none;
     padding: 15px 10px;
     outline: none;
-    border-radius: 24px;
     transition: 0.25px;
+    width: 100%;
+    border-bottom: 3px solid gray;
+    margin: 15px auto;
 }
-
-.login-box input[type="email"]:focus, .login-box input[type="text"]:focus, .login-box input[type="password"]:focus {
-    width: 260px;
-    border-color: chocolate;
-}
-.login-box button {
+#login-box [type='submit'] {
     border: 0;
     background: lightgray;
     display: block;
@@ -43,25 +42,72 @@
     margin-top: 20px;
     text-align: center;
     font-size: large;
-    border: 3px solid green;
+    border: 3px solid lightslategray;
     padding: 5px 15px;
     outline: none;
     border-radius: 24px;
     transition: 0.25px;
     cursor: pointer;
 }
-.login-box button:hover {
-    background: rgb(93, 190, 255);
+#login-box [type='submit']:hover {
+    background: rgb(185, 185, 185);
     transition: 0.2s;
 }
-.login-box a {
-    color: darkblue;
+#login-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: rgb(78, 0, 150);
 }
-.login-box a:hover {
-    color: blue;
+#login-box input:-webkit-autofill {
+    border: 1px solid none;
+    -webkit-text-fill-color: black;
+    transition: background-color 5000s ease-in-out 0s;
 }
+
 #message {
     margin-top: 0px;
     color: rgb(234, 3, 3);
     font-weight: 800;
+}
+.wraps {
+    width: 100%;
+    position: relative;
+}
+
+#close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: transparent;
+    border: none;
+    transform: scale(0.8);
+    transition: 0.5s;
+}
+#close:hover {
+    transform: scale(1);
+    background: transparent;
+}
+
+.error {
+    animation: shakeno 0.5s  ;
+}
+@keyframes shakeno {
+    0% {
+        margin-left: -10px;
+    }
+    25% {
+        margin-left: 10px;
+    }
+    50% {
+        margin-left: -10px;
+    }
+    75% {
+        margin-left: 10px;
+    }
+    100% {
+        margin-left: -10px;
+    }
 }
