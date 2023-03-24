@@ -37,29 +37,51 @@ onAuthStateChanged(auth, (user) => {
         });
 
         const pd = document.getElementById('pdIcon');
+        const coverDiv = document.createElement('div');
+        coverDiv.setAttribute('id', 'cover');
 
         pd.addEventListener('click', (e) => {
             if(pd.src == 'http://127.0.0.1:5500/icons/closedEye.png') {
                 
                 document.getElementById('passwordPromptDiv').style.transform = 'scale(1)';
-                //document.getElementById('passwordPromptDiv').style.boxShadow = '0 0 0 100vmax rgba(0,0,0,.3)';
-                //document.getElementById('headBar').style.filter = 'brightness(70%)'
                 
-                const coverDiv = document.createElement('div');
-                coverDiv.setAttribute('id', 'cover')
-                //document.insertBefore(coverDiv, document.getElementsByTagName('header'));
-                document.body.prepend(coverDiv)
+                document.body.appendChild(coverDiv);
 
-                pd.setAttribute('src', '../icons/openEye.png');
-                document.getElementById('aPasswd').setAttribute('type', 'text')
+                document.getElementById('passwordClose').addEventListener('click', (e) => {
+                    coverDiv.remove();
+                    document.getElementById('passwordPromptDiv').style.transform = 'scale(0)';
+                    return;
+                });
 
-                return;
+                document.getElementById('promptButton').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    get(child(databaseRef, `Users/${user.uid}/Password`)).then((passwd) => {
+                        if(document.getElementById('passwordPrompt').value == document.getElementById('aPasswd').value) {
+                            pd.setAttribute('src', '../icons/openEye.png');
+                            document.getElementById('aPasswd').setAttribute('type', 'text');
+                            
+                            coverDiv.remove();
+                            document.getElementById('passwordPromptDiv').style.transform = 'scale(0)';
+                            
+                            return;
+                        } else {
+                            document.getElementById('passwordPromptDiv').style.height = '125px'
+                            document.getElementById('promptMessage').innerHTML = 'Incorrect Password'
+    
+                            document.getElementById('passwordPrompt').classList.add('error')
+                            setTimeout(function() {
+                                document.getElementById('passwordPrompt').classList.remove('error');
+                            }, 500)
+                        }
+                    });
+                });
+
             }
             setTimeout((e) => {
                 if(pd.src == 'http://127.0.0.1:5500/icons/openEye.png') {
                     pd.setAttribute('src', '../icons/closedEye.png');
                     document.getElementById('aPasswd').setAttribute('type', 'password')
-
                     return;
                 }
             }, 100)

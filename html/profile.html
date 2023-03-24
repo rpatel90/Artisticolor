@@ -18,15 +18,14 @@
 <body>
     <header class="bar" id="headBar">
         <h1 class="webname">Artisticolor</h1>
-        
-        <!--Nav bar-->
-        <nav id="navigation" >
+
+        <nav id="navigation">
             <a class="nava" href="../html/home.html">Home</a>
             <a class="nava" href="../html/projects.html">Projects</a>
             <button id="lgnButton" class="btnLogin">Login</button>
         </nav>
     </header>
-
+    
     <form id="login-box">
             <h1>Login</h1>
             
@@ -50,9 +49,13 @@
     </form>
 
     <div id="passwordPromptDiv">
+        <button id="passwordClose"><img id="passwordCloseImg" src="../icons/passwordClose.png"></button>
         <label id="promptLabel">Enter Your Password</label>
-        <input type="password" id="passwordPrompt" autocomplete="current-password">
-        <button id="promptButton" type="submit">Hello</button>
+        <input type="password" id="passwordPrompt">
+        
+        <p id="promptMessage"></p>
+
+        <button id="promptButton" type="submit">Confirm</button>
     </div>
 
     <div class="accountBox">

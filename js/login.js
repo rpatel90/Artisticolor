@@ -23,19 +23,20 @@ onAuthStateChanged(auth, (user) => {
     if(user) { 
         console.log(user);
 
-        const loginBtn = document.getElementById('lgnButton');
         const navBar = document.getElementById('navigation');
 
+        //Create something to display user's username on
         const aElement = document.createElement('a');
         aElement.setAttribute('id', 'displayName');
         aElement.classList.add('userDisplay')
 
-        const imgElement = document.createElement('img');
-        updateProfile(user, { photoURL: 'https://www.seiu1000.org/sites/main/files/imagecache/hero/main-images/camera_lense_0.jpeg' });
-        imgElement.setAttribute('src', user.photoURL);
-        imgElement.setAttribute('height', '30px');
+        updateProfile(user, { photoURL: 'http://127.0.0.1:5500/usercon.png' });
+
+        //Create a place to display user's profile photo
+        //const imgElement = document.getElementById('userIcon');
+        //imgElement.setAttribute('src', user.photoURL);
        
-        loginBtn.remove();
+        document.getElementById('lgnButton').remove();
         aElement.textContent = user.displayName;
         navBar.appendChild(aElement);
         

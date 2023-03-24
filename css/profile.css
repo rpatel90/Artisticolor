@@ -62,7 +62,7 @@ body {
     top: 0;
     left: 0;
     background-color: black;
-    z-index: 5;
+    z-index: 3;
     opacity: 0.4;
 }
 
@@ -102,51 +102,57 @@ body {
     right: 0;
     bottom: 0;
     margin: auto;
-    justify-content: center;
-    z-index: 6;
     background-color: rgb(196, 196, 196);
-    height: 90px;
+    height: 100px;
     width: 300px;
     text-align: center;
     border-radius: 5px;
     transform: scale(0);
     transition: 0.1s;
-    z-index: 10;
-}
-#promptLabel {
-    position: absolute;
-    top: 15px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
+    z-index: 4;
+    padding: 10px;
 }
 #passwordPrompt {
     width: 220px;
     height: 20px;
+    text-align: center;
+}
+#passwordClose {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 250px;
     right: 0;
-    bottom: 0;
+    bottom: 70px;
     margin: auto;
+    background: transparent;
+    border: none;
 }
+#promptMessage {
+    color: rgb(234, 3, 3);
+}
+
+#passwordCloseImg {
+    height: 15px;
+    transition: 0.1s;
+    transform: scale(1);
+}
+#passwordCloseImg:hover {
+    height: 15px;
+    transform: scale(1.1);
+}
+
 #promptButton {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
+    margin-bottom: 20px;
     width: 80px;
     height: 20px;
     border-radius: 5px;
     background: lightgray;
+    transition: 0.1s;
+    border: 1px solid black;
 }
 #promptButton:hover {
     background-color: rgb(186, 186, 186);
-    transition: 0.1s;
 }
 #promptButton:hover:after {
-    
+    background: lightgray;
 }
