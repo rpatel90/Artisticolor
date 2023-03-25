@@ -19,6 +19,7 @@ import { // Firebase functions
     updateProfile
 } from './firebaseConfig.js';
 
+
 onAuthStateChanged(auth, (user) => {
     if(user) { 
         console.log(user);
