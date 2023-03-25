@@ -19,7 +19,7 @@ export const database = getDatabase();
 export const databaseRef = ref(database);
 export const auth = getAuth();
 
-//Exports firebase functions
+//Export firebase functions
 export { 
     initializeApp,
     getDatabase,

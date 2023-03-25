@@ -19,6 +19,13 @@ import { // Firebase functions
     updateProfile
 } from './firebaseConfig.js';
 
+const crypto = require('crypto');
+const password = 'myPassword123';
+const salt = crypto.randomBytes(16).toString('hex');
+const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
+console.log(salt);
+console.log(hash);
+
 
 document.getElementById('login-box').style.transform = 'scale(1)';
 document.getElementById('login-box').style.transition = '0s';
