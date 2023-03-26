@@ -1,26 +1,6 @@
-import { //Firebase variables
-	firebaseConfig,
-	app,
-	database,
-	databaseRef,
-	auth,
-} from './firebaseConfig.js';
-import { // Firebase functions
-	initializeApp,
-    getDatabase,
-    ref,
-    set,
-    get,
-    child,
-    getAuth,
-    onAuthStateChanged,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    updateProfile
-} from './firebaseConfig.js';
+import * as fb from './firebaseConfig.js'
 
-
-onAuthStateChanged(auth, (user) => {
+fb.onAuthStateChanged(fb.auth, (user) => {
     if(user) { 
         console.log(user);
 
@@ -31,7 +11,7 @@ onAuthStateChanged(auth, (user) => {
         aElement.setAttribute('id', 'displayName');
         aElement.classList.add('userDisplay')
 
-        updateProfile(user, { photoURL: 'http://127.0.0.1:5500/usercon.png' });
+        fb.updateProfile(user, { photoURL: 'http://127.0.0.1:5500/usercon.png' });
 
         //Create a place to display user's profile photo
         //const imgElement = document.getElementById('userIcon');
@@ -56,7 +36,7 @@ onAuthStateChanged(auth, (user) => {
                 return;
             }
 
-            signInWithEmailAndPassword(auth, email.value, password.value).then((userCredential) => {
+            fb.signInWithEmailAndPassword(fb.auth, email.value, password.value).then((userCredential) => {
 
                 const user = userCredential.user;
                 

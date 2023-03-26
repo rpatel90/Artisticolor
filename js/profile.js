@@ -1,23 +1,4 @@
-import { //Firebase variables
-	firebaseConfig,
-	app,
-	database,
-	databaseRef,
-	auth,
-} from './firebaseConfig.js';
-import { // Firebase functions
-	initializeApp,
-    getDatabase,
-    ref,
-    set,
-    get,
-    child,
-    getAuth,
-    onAuthStateChanged,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    updateProfile
-} from './firebaseConfig.js';
+import * as firebase from './firebaseConfig.js'
 
 document.getElementById('logout').addEventListener('click', function() {
     //Sign out user
@@ -26,12 +7,12 @@ document.getElementById('logout').addEventListener('click', function() {
     })
 });
 
-onAuthStateChanged(auth, (user) => {
+firebase.onAuthStateChanged(firebase.auth, (user) => {
     if(user) {
         document.getElementById('aEmail').value = user.email;
         document.getElementById('aUsername').value = user.displayName;
         
-        get(child(databaseRef, `Users/${user.uid}/Password`)).then((pwd) => {
+        get(child(firebase.databaseRef, `Users/${user.uid}/Password`)).then((pwd) => {
             const passwd = pwd._node.value_
             document.getElementById('aPasswd').value = passwd;
         });
@@ -56,7 +37,7 @@ onAuthStateChanged(auth, (user) => {
                 document.getElementById('promptButton').addEventListener('click', (e) => {
                     e.preventDefault();
                     
-                    get(child(databaseRef, `Users/${user.uid}/Password`)).then((passwd) => {
+                    firebase.get(firebase.child(firebase.databaseRef, `Users/${user.uid}/Password`)).then((passwd) => {
                         if(document.getElementById('passwordPrompt').value == document.getElementById('aPasswd').value) {
                             pd.setAttribute('src', '../icons/openEye.png');
                             document.getElementById('aPasswd').setAttribute('type', 'text');
