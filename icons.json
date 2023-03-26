@@ -1,0 +1,36 @@
+{
+    "Icons": {
+        "Email-Icon": {
+            "author": "Freepik",
+            "title": "email icons",
+            "attribution": "<a href='https://www.flaticon.com/free-icons/email' title='email icons'>Email icons created by Freepik - Flaticon</a>"
+        },
+        "User-Icon": {
+            "author": "riajulislam",
+            "title": "user icons",
+            "attribution": "<a href='https://www.flaticon.com/free-icons/user' title='user icons'>User icons created by riajulislam - Flaticon</a>"
+        },
+        "Eye-Icons": {
+            "Open-Eye": {
+                "author": "Kiranshastry",
+                "title": "eye icons",
+                "attribution": "<a href='https://www.flaticon.com/free-icons/eye' title='eye icons'>Eye icons created by Kiranshastry - Flaticon</a>"
+            },
+            "Closed-Eye": {
+                "author": "Fathema Khanom",
+                "title": "eye password icons",
+                "attribution": "<a href='https://www.flaticon.com/free-icons/eye-password' title='eye password icons'>Eye password icons created by Fathema Khanom - Flaticon</a>"
+            }
+        },
+        "Password-Prompt-Close": {
+            "author": "Pixel perfect",
+            "title": "close icons",
+            "attribution": "<a href='https://www.flaticon.com/free-icons/close' title='close icons'>Close icons created by Pixel perfect - Flaticon</a>"
+        },
+        "Login-Box-Close": {
+            "author": "icon wind",
+            "title": "close icons",
+            "attribution": "<a href='https://www.flaticon.com/free-icons/close' title='close icons'>Close icons created by icon wind - Flaticon</a>"
+        }
+    }
+}
