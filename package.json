@@ -1,0 +1,25 @@
+{
+  "name": "artisticolor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "../js/register.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aspect-6/Artisticolor.git"
+  },
+  "author": "Neel Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aspect-6/Artisticolor/issues"
+  },
+  "homepage": "https://github.com/Aspect-6/Artisticolor#readme",
+  "dependencies": {
+    "requirejs": "^2.3.6"
+  },
+  "devDependencies": {
+    "@types/requirejs": "^2.1.34"
+  }
+}
