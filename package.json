@@ -2,7 +2,7 @@
   "name": "artisticolor",
   "version": "1.0.0",
   "description": "",
-  "main": "../js/register.js",
+  "main": "/js/home.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,9 +17,6 @@
   },
   "homepage": "https://github.com/Aspect-6/Artisticolor#readme",
   "dependencies": {
-    "requirejs": "^2.3.6"
-  },
-  "devDependencies": {
-    "@types/requirejs": "^2.1.34"
+    "crypto-js": "^4.1.1"
   }
 }

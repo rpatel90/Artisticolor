@@ -1,6 +1,8 @@
+//import * as fb from './firebaseConfig.js'
 
-//const crypto = require('crypto');
+const CryptoJS = require('crypto-js')
 
+//Show register box
 document.getElementById('login-box').style.transform = 'scale(1)';
 document.getElementById('login-box').style.transition = '0s';
 document.getElementById('login-box').style.top = '0px';
@@ -19,28 +21,30 @@ document.getElementById('submit').addEventListener('click', function() {
 	if(email.value == '' || username.value == '' || password.value == '') {
 		return;
 	}
-	//Check if username is too big
+	//Check if username is larger than 15 characters
 	if(username.value.length > 15) {
 		message.innerHTML = 'Username cannot exceed 20 characters';
 		return;
 	}
 
+	//Encrypt data
+	const encryptedEmail = CryptoJS.AES.encrypt(email.value, 'sha-256');
+	const encryptedUsername = CryptoJS.AES.encrypt(username.value, 'sha-256');
+	const encryptedPassword = CryptoJS.AES.encrypt(password.value, 'sha-256');
+
 	//Create a user and add user to database
-	firebase.createUserWithEmailAndPassword(firebase.auth, email.value, password.value).then((userCredential) => {
+	fb.createUserWithEmailAndPassword(fb.auth, encryptedEmail, encryptedPassword).then((userCredential) => {
 		
 		const user = userCredential.user;
 		const uid = user.uid;
 		
-		const lastLogin = JSON.stringify(user.metadata.lastSignInTime)
-
-		firebase.updateProfile(user, {
+		fb.updateProfile(user, {
 			displayName: username
 		});
-		firebase.set(firebase.ref(firebase.database, `Users/${uid}`), {
-			Username: username.value,
-			Email: email.value,
-			Password: password.value,
-			Last_Login: lastLogin,
+		fb.set(fb.ref(fb.database, `Users/${uid}`), {
+			Username: encryptedUsername,
+			Email: encryptedEmail,
+			Password: encryptedPassword,
 		});
 		
 		location.href = './home.html'

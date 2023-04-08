@@ -1,1 +1,1 @@
-import * as firebase from './firebaseConfig.js'
+import * as fb from './firebaseConfig.js'
