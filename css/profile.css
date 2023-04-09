@@ -2,8 +2,9 @@ h1 {
     color: rgba(175, 0, 215, 0.751);
 }
 #header {
-    font-size: 3em;
+    font-size: 2.5em;
     color: rgba(175, 0, 215, 0.751);
+    margin-bottom: 60px;
 }
 body {
     overflow: hidden;

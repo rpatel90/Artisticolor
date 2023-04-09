@@ -14,7 +14,19 @@ const CryptoJS = require('crypto-js')
 
 fb.onAuthStateChanged(fb.auth, (user) => {
     if(user) { //User is logged in
-        //Display username and email
+        //Create img element to display profile photo
+		const imgEl = document.createElement('img')
+		imgEl.setAttribute('id', 'profilePhoto')
+		imgEl.setAttribute('src', user.photoURL)
+		imgEl.setAttribute('height', '100px')
+		imgEl.setAttribute('width', '100px')
+		imgEl.style.marginLeft = '20px'
+
+		//Display username and email
+		document.getElementById('header').innerHTML = user.displayName;
+		document.getElementById('header').appendChild(imgEl)
+		document.getElementById('header')
+
 		document.getElementById('aEmail').value = user.email;
         document.getElementById('aUsername').value = user.displayName;
         
@@ -47,28 +59,32 @@ fb.onAuthStateChanged(fb.auth, (user) => {
                 document.body.appendChild(coverDiv);
 
 				//Close password prompt code
-				const closePrompt = "document.getElementById('cover').remove();document.getElementById('passwordPromptDiv').style.transform = 'scale(0)';"
-
+				const closePrompt = ""
 				//Add event listener to close button and coverDiv
                 document.getElementById('passwordClose').addEventListener('click', (e) => {
                     //Close the prompt and remove coverDiv from body
-					setTimeout(closePrompt, 1)
+					document.getElementById('cover').remove();
+					document.getElementById('passwordPromptDiv').style.transform = 'scale(0)'; 
 					return;
                 });
 				coverDiv.addEventListener('click', (e) => {
 					//Close the prompt and remove coverDiv from body
-					setTimeout(closePrompt, 1)
+					document.getElementById('cover').remove();
+					document.getElementById('passwordPromptDiv').style.transform = 'scale(0)';
 					return;
 				});
 
+				//Check if confirm button is clicked
                 document.getElementById('promptButton').addEventListener('click', (e) => {
-                    e.preventDefault();
+                    //Stop page refresh
+					e.preventDefault();
                     
-                    fb.get(fb.child(fb.databaseRef, `Users/${user.uid}/Password`)).then((passwd) => {
+					//Check if password
+                    fb.get(fb.child(fb.databaseRef, `Users/${user.uid}/Password`)).then(() => {
                         if(document.getElementById('passwordPrompt').value == document.getElementById('aPasswd').value) {
                             pd.setAttribute('src', '../icons/openEye.png');
                             document.getElementById('aPasswd').setAttribute('type', 'text');
-                            
+                            console.log('hello')
                             coverDiv.remove();
                             document.getElementById('passwordPromptDiv').style.transform = 'scale(0)';
                             
@@ -99,6 +115,9 @@ fb.onAuthStateChanged(fb.auth, (user) => {
         
     }
 });
+
+//------------------------------------------------------------------------------------------
+
 },{"crypto-js":12}],3:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
