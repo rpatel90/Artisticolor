@@ -1,4 +1,4 @@
-import * as fb from './firebaseConfig.js'
+import * as fb from '../firebase/firebaseConfig.js'
 
 fb.onAuthStateChanged(fb.auth, (user) => {
     if(user) { 

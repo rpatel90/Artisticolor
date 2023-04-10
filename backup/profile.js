@@ -1,4 +1,4 @@
-//import * as fb from './firebaseConfig.js'
+import * as fb from './firebaseConfig.js'
 
 document.getElementById('logout').addEventListener('click', function() {
     //Sign out user
