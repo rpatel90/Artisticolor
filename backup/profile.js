@@ -1,4 +1,4 @@
-import * as fb from './firebaseConfig.js'
+//import * as fb from './firebaseConfig.js'
 
 document.getElementById('logout').addEventListener('click', function() {
     //Sign out user
@@ -9,7 +9,7 @@ document.getElementById('logout').addEventListener('click', function() {
 
 const CryptoJS = require('crypto-js')
 
-fb.onAuthStateChanged(fb.auth, (user) => {
+fb.Auth.onAuthStateChanged(fb.auth, (user) => {
     if(user) {
         document.getElementById('aEmail').value = user.email;
         document.getElementById('aUsername').value = user.displayName;

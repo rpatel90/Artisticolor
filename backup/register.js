@@ -1,4 +1,4 @@
-import * as fb from './firebaseConfig.js'
+//mport * as fb from './firebaseConfig.js'
 
 const CryptoJS = require('crypto-js')
 
