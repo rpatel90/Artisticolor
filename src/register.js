@@ -8,6 +8,17 @@ document.getElementById('login-box').style.top = '0px';
 
 document.getElementById('submit').addEventListener('click', function() {
 	
+	function randomKey() {
+		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		const charsLen = chars.length;
+		const rlen = Math.floor((Math.random() * 15) + 10)
+		let result = ' ';
+		for (let i = 0; i < rlen; i++) {
+			result += chars.charAt(Math.floor(Math.random() * charsLen));
+		}
+		return result;
+	}
+
 	//Get email, username, & password boxes
 	const email = document.getElementById('email');
 	const username = document.getElementById('username');
@@ -25,11 +36,6 @@ document.getElementById('submit').addEventListener('click', function() {
 		message.innerHTML = 'Username cannot exceed 20 characters';
 		return;
 	}
-
-	//Encrypt data
-	const encryptedEmail = CryptoJS.AES.encrypt(email.value, 'sha-256');
-	const encryptedUsername = CryptoJS.AES.encrypt(username.value, 'sha-256');
-	const encryptedPassword = CryptoJS.AES.encrypt(password.value, 'sha-256');
 	
 	//Create a user and add user to database
 	fb.Auth.createUserWithEmailAndPassword(fb.auth, email.value, password.value).then((userCredential) => {
@@ -37,13 +43,24 @@ document.getElementById('submit').addEventListener('click', function() {
 		const user = userCredential.user;
 		const uid = user.uid;
 
+		const KEY = randomKey();
+
+		//Encrypt data
+		const encryptedEmail = CryptoJS.AES.encrypt(email.value, KEY);
+		const encryptedUsername = CryptoJS.AES.encrypt(username.value, KEY);
+		const encryptedPassword = CryptoJS.AES.encrypt(password.value, KEY);
+
+		// Set user display name
 		fb.Auth.updateProfile(user, {
 			displayName: username.value
 		});
-		fb.Db.set(fb.Db.ref(fb.Db.database, `Users/${uid}`), {
+
+		// Add data to database
+		fb.Db.set(fb.Db.ref(fb.database, `Users/${uid}`), {
 			Username: encryptedUsername.toString(),
 			Email: encryptedEmail.toString(),
 			Password: encryptedPassword.toString(),
+			Key: KEY
 		});
 		
 		location.href = './home.html'

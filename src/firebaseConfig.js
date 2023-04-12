@@ -22,6 +22,25 @@ const firebaseConfig = require('firebase/app').initializeApp({
 const database = Db.getDatabase(firebaseConfig);
 const auth = Auth.getAuth(firebaseConfig);
 const databaseRef = Db.ref(database);
+/*
+const setKey = async () => {
+    var Key = await Db.get(Db.child(databaseRef, 'Users/Key')).then((key) => {
+        //console.log(key._node.value_)
+        return key._node.value_;
+    });
+    console.log(Key)
+}
+console.log(Key)
+console.log(setKey())
+*/
+/*
+setKey().then((KEY) => {
+    
+    
+    console.log(module.exports)
+});
+*/
+
 
 module.exports = {
     Auth,
@@ -29,16 +48,4 @@ module.exports = {
     database,
     databaseRef,
     auth,
-}
-
-//Export firebase functions
-// export {
-//     ref,
-//     set,
-//     get,
-//     child,
-//     onAuthStateChanged,
-//     createUserWithEmailAndPassword,
-//     signInWithEmailAndPassword,
-//     updateProfile
-// }
+};
