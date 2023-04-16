@@ -1,42 +1,39 @@
-const CryptoJS = require('crypto-js')
-const fb = require('./firebaseConfig.js')
-
-document.getElementById('logout').addEventListener('click', function () {
-    //Sign out user
-    fb.Auth.signOut().then(() => {
-        location.href = 'home.html'
-    })
-});
-
-fb.Auth.onAuthStateChanged(fb.auth, (user) => {
+require('./init-fb').init();
+const CryptoJS = require('crypto-js');
+    
+onAuthStateChanged(auth, (user) => {
     if(user) { //User is logged in
-        //Create img element to display profile photo
-        const imgEl = document.createElement('img')
-        imgEl.setAttribute('id', 'profilePhoto')
-        imgEl.setAttribute('src', user.photoURL)
-        imgEl.setAttribute('height', '100px')
-        imgEl.setAttribute('width', '100px')
-        imgEl.style.marginLeft = '20px'
-
-        //Display username and email
-        document.getElementById('header').innerHTML = user.displayName;
-        document.getElementById('header').appendChild(imgEl);
-        document.getElementById('header');
-
-        document.getElementById('aEmail').value = user.email;
-        document.getElementById('aUsername').value = user.displayName;
-
-        //Get and decrypt user password from database and display it
-        fb.Db.get(fb.Db.child(fb.databaseRef, `Users/${user.uid}/Password`)).then((pwd) => {
-            fb.Db.get(fb.Db.child(fb.databaseRef, `Users/${user.uid}/Key`)).then((KEY) => {
+        //Decrypt user password from database and to display
+        get(child(database, `Users/${user.uid}/Password`)).then((pwd) => {
+            get(child(database, `Users/${user.uid}/Key`)).then((key) => {
                 //Decrypt password
-                const decrypted = CryptoJS.AES.decrypt(pwd._node.value_, KEY._node.value_)
+                const KEY = key.val();
+                const decrypted = CryptoJS.AES.decrypt(pwd.val(), KEY)
                 const passwdDisplay = decrypted.toString(CryptoJS.enc.Utf8)
-
+    
                 //Display password
                 document.getElementById('aPasswd').value = passwdDisplay;
-            });
+            }); 
         });
+        
+        //Sign user out from account if Log out button pressed
+        document.getElementById('logout').addEventListener('click', () => {
+            signOut(auth).then(() => { location.href = 'home.html' });
+        });
+
+        //Create img element to display user profile photo 
+        const imgEl = document.createElement('img');
+        imgEl.setAttribute('id', 'profilePhoto');
+        imgEl.setAttribute('src', user.photoURL);
+        imgEl.style.height = '130px';
+        imgEl.style.width = '130px';
+        imgEl.style.margin = 'auto';
+        imgEl.style.marginBottom = '-40px';
+        document.getElementById('header').appendChild(imgEl); 
+
+        //Display username and email
+        document.getElementById('aEmail').value = user.email;
+        document.getElementById('aUsername').value = user.displayName;
 
         //Get password icon element
         const pd = document.getElementById('pdIcon');
@@ -50,7 +47,7 @@ fb.Auth.onAuthStateChanged(fb.auth, (user) => {
 
         //Add event listener to password icon
         pd.addEventListener('click', (e) => {
-            if (pd.src == 'http://127.0.0.1:5500/icons/closedEye.png') {
+            if(pd.src == 'http://127.0.0.1:5500/icons/closedEye.png') {
 
                 //Show the password confirmation prompt
                 document.getElementById('passwordPromptDiv').style.transform = 'scale(1)';
@@ -58,15 +55,16 @@ fb.Auth.onAuthStateChanged(fb.auth, (user) => {
                 document.body.appendChild(coverDiv);
 
                 //Add event listener to close button and coverDiv
-                document.getElementById('passwordClose').addEventListener('click', (e) => {
+                document.getElementById('passwordClose').addEventListener('click', () => {
                     //Close the prompt and remove coverDiv from body
-                    document.getElementById('cover').remove();
+                    try { document.getElementById('cover').remove() } catch {}
+                    
                     document.getElementById('passwordPromptDiv').style.transform = 'scale(0)';
                     return;
                 });
-                coverDiv.addEventListener('click', (e) => {
+                coverDiv.addEventListener('click', () => {
                     //Close the prompt and remove coverDiv from body
-                    document.getElementById('cover').remove();
+                    try { document.getElementById('cover').remove() } catch {}
                     document.getElementById('passwordPromptDiv').style.transform = 'scale(0)';
                     return;
                 });
@@ -77,7 +75,7 @@ fb.Auth.onAuthStateChanged(fb.auth, (user) => {
                     e.preventDefault();
 
                     //Check if password
-                    fb.Db.get(fb.Db.child(fb.databaseRef, `Users/${user.uid}/Password`)).then(() => {
+                    get(child(database, `Users/${user.uid}/Password`)).then(() => {
                         //If user confirms with correct password, display password and show open eye
                         if (document.getElementById('passwordPrompt').value == document.getElementById('aPasswd').value) {
                             //Show password and set eye image to open
@@ -89,7 +87,7 @@ fb.Auth.onAuthStateChanged(fb.auth, (user) => {
                             document.getElementById('passwordPromptDiv').style.transform = 'scale(0)';
 
                             return;
-                        } else { //If user confirms with incorrect password, shake box and display error
+                        } else { //If user confirms with incorrect password, shake box and display error 
                             //Make box bigger to display error message
                             document.getElementById('passwordPromptDiv').style.height = '125px'
                             document.getElementById('promptMessage').innerHTML = 'Incorrect Password'
@@ -102,7 +100,6 @@ fb.Auth.onAuthStateChanged(fb.auth, (user) => {
                         }
                     });
                 });
-
             }
             setTimeout((e) => {
                 //If eye image is open, change to closed and hide password
@@ -114,6 +111,6 @@ fb.Auth.onAuthStateChanged(fb.auth, (user) => {
             }, 100)
         });
     } else { //User not logged in
-
+        document.getElementById('userData').style.height = 'calc(400 / 800 * 100%)';
     }
 });

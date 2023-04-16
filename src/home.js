@@ -1,2 +1,1 @@
-const fb = require('./firebaseConfig.js')
- 
+require('./init-fb').init();

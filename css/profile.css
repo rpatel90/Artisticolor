@@ -1,3 +1,6 @@
+:root {
+    --accBoxHeight: 550;
+}
 h1 {
     color: rgba(175, 0, 215, 0.751);
 }
@@ -22,15 +25,14 @@ body {
     margin: auto;
     background-color: bisque;
     width: 500px;
-    height: 550px;
+    height: calc(var(--accBoxHeight) / 800 * 100%);
     border-radius: 20px;
     padding: 10px;
     z-index: 1;
 }
 .dataElements {
     position: relative;
-    margin-top: 40px;
-    height: 30x;
+    margin-top: calc(40 / var(--accBoxHeight) * 100%);
     font-size: large;
     text-align: center;
     background-color: lightgray;
@@ -39,7 +41,6 @@ body {
     background: transparent;
 }
 .dataElements:focus {
-    width: 280px;
     outline: none;
 }
 .wraps {
@@ -58,7 +59,7 @@ body {
 }
 #cover {
     position: absolute;
-    height: 110vh;
+    height: 100%;
     width: 100%;
     top: 0;
     left: 0;
@@ -73,7 +74,7 @@ body {
 }
 
 #logout {
-    margin-top: 50px;
+    margin-top: 40px;
     width: 120px;
     height: 35px;
     border-radius: 18px;

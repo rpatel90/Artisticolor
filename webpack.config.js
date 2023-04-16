@@ -1,43 +1,33 @@
 const path = require('path')
-module.exports = [
-    // firebaseConfig.js
-    {
-        entry: "./src/firebaseConfig.js",
-        output: {
-            path: path.resolve(__dirname, "./dist"),
-                filename: "firebaseConfig.js"
-        }
-    },
+const FBROOT = "./src/init-fb";
+
+module.exports = [ //Bundles
+    /*
+    * ALL BUNDLES HAVE FBROOT BUNDLED BY DEFAULT
+    */
     // home.js
     {
-        entry: "./src/home.js",
+        entry: [FBROOT, "/src/home", "/src/login", "/src/listener"],
         output: {
-            path: path.resolve(__dirname, "./dist"),
+            path: path.resolve(__dirname, "dist"),
             filename: "home.js"
-        }
-    },
-    // login.js
-    {
-        entry: "./src/login.js",
-        output: {
-            path: path.resolve(__dirname, "./dist"),
-            filename: "login.js"
         }
     },
     // profile.js
     {
-        entry: "./src/profile.js",
+        entry: [FBROOT, "/src/profile", "/src/login", "/src/listener"],
         output: {
-            path: path.resolve(__dirname, "./dist"),
+            path: path.resolve(__dirname, "dist"),
             filename: "profile.js"
         }
     },
     // register.js
     {
-        entry: "./src/register.js",
+        entry: [FBROOT, "/src/register"],
         output: {
-            path: path.resolve(__dirname, "./dist"),
+            path: path.resolve(__dirname, "dist"),
             filename: "register.js"
         }
     },
+    
 ];

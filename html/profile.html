@@ -9,13 +9,11 @@
     <link rel="stylesheet" href="../css/lgnregBox.css">
     <link rel="stylesheet" href="../css/nav.css">
     
-    <script type="module" src="../dist/firebaseConfig.js"></script>
     <script type="module" src="../dist/profile.js"></script>
-    <script type="module" src="../dist/login.js"></script>
     
     <title>Profile</title>
 </head>
-<body>
+<body onload="">
     <header class="bar" id="headBar">
         <h1 class="webname">Artisticolor</h1>
 
@@ -33,12 +31,12 @@
 
             <div class="wraps">
                 <label id="emailLabel">Email</label>
-                <input type="email" id="email" autocomplete="email">
+                <input type="email" id="email" class="lgnBoxInput" autocomplete="email">
             </div>
 
             <div class="wraps">
                 <label id="passwordLabel">Password</label>
-                <input type="password" id="password" autocomplete="current-password">
+                <input type="password" id="password" class="lgnBoxInput" autocomplete="current-password">
             </div>
 
             <p id="message"></p>
@@ -58,7 +56,7 @@
         <button id="promptButton" type="submit">Confirm</button>
     </div>
 
-    <div class="accountBox">
+    <div id="userData" class="accountBox">
 
         <h2 id="header"></h2>
         
@@ -66,22 +64,22 @@
             
             <div class="email">
                 <label class="labels">Email:</label>
-                <input type="email" class="dataElements" id="aEmail" autocomplete="email">
+                <input type="email" class="dataElements" id="aEmail" autocomplete="email" readonly>
                 <img id="emIcon" src="../icons/email.png" height="22px">
             </div>
 
             <div class="username">
                 <label class="labels">Username:</label>
-                <input type="text" class="dataElements" id="aUsername" autocomplete="username">
+                <input type="text" class="dataElements" id="aUsername" autocomplete="username" readonly>
                 <img id="urIcon" src="../icons/user.png" height="22px">
             </div> 
 
             <div class="password"> 
                 <label class="labels">Password:</label>
-                <input type="password" class="dataElements" id="aPasswd" autocomplete="current-password">
+                <input type="password" class="dataElements" id="aPasswd" autocomplete="current-password" readonly>
                 <img id="pdIcon" src="../icons/closedEye.png" height="22px">
             </div>
-            <button type="submit" id="logout">Logout</button>
+            <button type="submit" id="logout">Log Out</button>
         </form>
     </div>
     

@@ -1,5 +1,5 @@
+require('./init-fb').init();
 const CryptoJS = require('crypto-js');
-const fb = require('./firebaseConfig.js')
 
 //Show register box
 document.getElementById('login-box').style.transform = 'scale(1)';
@@ -66,7 +66,6 @@ document.getElementById('submit').addEventListener('click', function() {
 		location.href = './home.html'
 	}).catch((error) => {
 		const errorcode = error.code
-		const errorMessage = error.message
 
 		if(errorcode == 'auth/invalid-email') {
 			message.innerHTML = 'Invalid email';

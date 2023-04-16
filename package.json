@@ -2,11 +2,11 @@
   "name": "artisticolor",
   "version": "1.0.0",
   "description": "",
-  "main": "/src/home.js",
+  "main": "/src/firebaseConfig.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode development",
     "start": "nodemon"
+
   },
   "repository": {
     "type": "git",

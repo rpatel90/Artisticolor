@@ -130,23 +130,43 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/firebaseConfig.js":
-/*!*******************************!*\
-  !*** ./src/firebaseConfig.js ***!
-  \*******************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("//Import firebase functions\n//import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js';\n//import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js';\n//import { getDatabase, ref, set, get, child } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js';\n\n// firebase services import\n//const App = require('firebase/app');\nconst Auth = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/index.cjs.js\")\nconst Db = __webpack_require__(/*! firebase/database */ \"./node_modules/firebase/database/dist/index.cjs.js\")\n\nconst firebaseConfig = (__webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/index.cjs.js\").initializeApp)({\n    apiKey: \"AIzaSyC0AlemsEruFplUQFL5DVRg6oQtmfrhz_I\",\n    authDomain: \"artisticolor-a55cf.firebaseapp.com\",\n    databaseURL: \"https://artisticolor-a55cf-default-rtdb.firebaseio.com\",\n    projectId: \"artisticolor-a55cf\",\n    storageBucket: \"artisticolor-a55cf.appspot.com\",\n    messagingSenderId: \"777420719697\",\n    appId: \"1:777420719697:web:55131e8a4f5144f1891a70\",\n    measurementId: \"G-JZ1H6Y93YL\"\n});\n\nconst database = Db.getDatabase(firebaseConfig);\nconst auth = Auth.getAuth(firebaseConfig);\nconst databaseRef = Db.ref(database);\n/*\nconst setKey = async () => {\n    var Key = await Db.get(Db.child(databaseRef, 'Users/Key')).then((key) => {\n        //console.log(key._node.value_)\n        return key._node.value_;\n    });\n    console.log(Key)\n}\nconsole.log(Key)\nconsole.log(setKey())\n*/\n/*\nsetKey().then((KEY) => {\n    \n    \n    console.log(module.exports)\n});\n*/\n\n\nmodule.exports = {\n    Auth,\n    Db,\n    database,\n    databaseRef,\n    auth,\n};\n\n//# sourceURL=webpack://artisticolor/./src/firebaseConfig.js?");
-
-/***/ }),
-
 /***/ "./src/home.js":
 /*!*********************!*\
   !*** ./src/home.js ***!
   \*********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const fb = __webpack_require__(/*! ./firebaseConfig.js */ \"./src/firebaseConfig.js\")\n \n\n//# sourceURL=webpack://artisticolor/./src/home.js?");
+eval("(__webpack_require__(/*! ./init-fb */ \"./src/init-fb.js\").init)();\n\n\n//# sourceURL=webpack://artisticolor/./src/home.js?");
+
+/***/ }),
+
+/***/ "./src/init-fb.js":
+/*!************************!*\
+  !*** ./src/init-fb.js ***!
+  \************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("(__webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/index.cjs.js\").initializeApp)({\n    apiKey: \"AIzaSyC0AlemsEruFplUQFL5DVRg6oQtmfrhz_I\",\n    authDomain: \"artisticolor-a55cf.firebaseapp.com\",\n    databaseURL: \"https://artisticolor-a55cf-default-rtdb.firebaseio.com\",\n    projectId: \"artisticolor-a55cf\",\n    storageBucket: \"artisticolor-a55cf.appspot.com\",\n    messagingSenderId: \"777420719697\",\n    appId: \"1:777420719697:web:55131e8a4f5144f1891a70\",\n    measurementId: \"G-JZ1H6Y93YL\"\n});\n\n//Unpack firebase auth and database module\nconst fbExp = { ...__webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/index.cjs.js\"), ...__webpack_require__(/*! firebase/database */ \"./node_modules/firebase/database/dist/index.cjs.js\") }\n\n//Export Firebase object containing all necessary firebase operations \nmodule.exports = {\n    ...fbExp,\n    auth: fbExp.getAuth(),\n    database: fbExp.ref(fbExp.getDatabase()),\n    init: () => { for (const key in module.exports) { window[key] = module.exports[key] } },\n}\n\n//# sourceURL=webpack://artisticolor/./src/init-fb.js?");
+
+/***/ }),
+
+/***/ "./src/listener.js":
+/*!*************************!*\
+  !*** ./src/listener.js ***!
+  \*************************/
+/***/ (() => {
+
+eval("//Open / close login-box\ndocument.getElementById('lgnButton').addEventListener('click', function () {\n    document.getElementById('login-box').style.transform = 'scale(1)';\n});\ndocument.getElementById('close').addEventListener('click', (e) => {\n    e.preventDefault();\n    document.getElementById('login-box').style.transform = 'scale(0)';\n});\n\n//Move the label up when the input box is selected\ndocument.getElementById('email').addEventListener('focus', function () {\n    document.getElementById('emailLabel').style.transform = 'translateY(-200%)';\n    document.getElementById('emailLabel').style.transition = '0.25s';\n    if (document.getElementById('password').value == '') {\n        document.getElementById('passwordLabel').style.transform = 'translateY(-50%)';\n    }\n});\ndocument.getElementById('password').addEventListener('focus', function () {\n    document.getElementById('passwordLabel').style.transform = 'translateY(-200%)';\n    document.getElementById('passwordLabel').style.transition = '0.25s';\n    if (document.getElementById('email').value == '') {\n        document.getElementById('emailLabel').style.transform = 'translateY(-50%)';\n    }\n});\n\n//# sourceURL=webpack://artisticolor/./src/listener.js?");
+
+/***/ }),
+
+/***/ "./src/login.js":
+/*!**********************!*\
+  !*** ./src/login.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("(__webpack_require__(/*! ./init-fb */ \"./src/init-fb.js\").init)();\n\nonAuthStateChanged(auth, (user) => {\n    if(user) {\n        console.log(user);\n\n        //Get header element\n        const navBar = document.getElementById('navigation');\n\n        //Create element to display user username\n        const aElement = document.createElement('a');\n        aElement.setAttribute('id', 'displayName');\n        aElement.classList.add('userDisplay')\n        \n        //Display user display name\n        document.getElementById('lgnButton').remove();\n        aElement.textContent = user.displayName;\n        navBar.appendChild(aElement);\n\n        //Close login window\n        const close = document.getElementById('close');\n        close.click();\n\n        //If userdata box exists then shorten height of userData box\n        if(document.getElementById('userData')) {\n            document.getElementById('userData').style.height = 'calc(var(--accBoxHeight) / 800 * 100%)';\n        }\n    } else {\n        //Sign in user when login button is pressed\n        document.getElementById('login-box').style.transform = 'scale(0)';\n\n        //If login button pressed then login the user\n        document.getElementById('login').addEventListener('click', (e) => {\n            e.preventDefault();\n            \n            //Get the email and password input boxes\n            const email = document.getElementById('email');\n            const password = document.getElementById('password');\n\n            //If entered values are blank, end the function\n            if(email == '' || password == '') {\n                return;\n            }\n\n            //Login user\n            signInWithEmailAndPassword(auth, email.value, password.value).then(() => {\n                //Close login window\n                const close = document.getElementById('close');\n                close.click();\n            }).catch(() => {\n                //Shake input boxes\n                const loginInputs = document.getElementsByClassName('lgnBoxInput');\n                loginInputs.classList.add('error');\n                setTimeout(() => { loginInputs.classList.remove('error') }, 500);\n                \n                //Display error message\n                document.getElementById('message').innerHTML = 'Invalid email or password';\n            });\n        });\n    }\n});\n\n\n\n//# sourceURL=webpack://artisticolor/./src/login.js?");
 
 /***/ }),
 
@@ -243,8 +263,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/home.js");
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	__webpack_require__("./src/init-fb.js");
+/******/ 	__webpack_require__("./src/home.js");
+/******/ 	__webpack_require__("./src/login.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/listener.js");
 /******/ 	
 /******/ })()
 ;
