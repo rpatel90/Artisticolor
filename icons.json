@@ -31,6 +31,36 @@
             "author": "icon wind",
             "title": "close icons",
             "attribution": "<a href='https://www.flaticon.com/free-icons/close' title='close icons'>Close icons created by icon wind - Flaticon</a>"
+        },
+        "Create-New-Project": {
+            "author": "Karacis",
+            "title": "add icons",
+            "attribution": "<a href='https://www.flaticon.com/free-icons/add' title='add icons'>Add icons created by Karacis - Flaticon</a>"
+        },
+        "Settings": {
+            "author": "Pixel perfect",
+            "title": "settings icons",
+            "attribution": "<a href='https://www.flaticon.com/free-icons/settings' title='settings icons'>Settings icons created by Pixel perfect - Flaticon</a>"
+        },
+        "Logout": {
+            "author": "Kyoz",
+            "title": "logout icons",
+            "attribution": "<a href='https://www.flaticon.com/free-icons/logout' title='logout icons'>Logout icons created by Kyoz - Flaticon</a>"
+        },
+        "Default-Profile-Icon": {
+            "author":"",
+            "title":"",
+            "attribution":"<a href='https://www.flaticon.com/free-icons/user' title='user icon'>User icons created by kmg design - Flaticon</a>"
+        },
+        "Right-Arrow": {
+            "author": "Roundicons",
+            "title": "back icons",
+            "attribution": "<a href='https://www.flaticon.com/free-icons/back' title='back icons'>Back icons created by Roundicons - Flaticon</a>"
+        },
+        "Dropdown-Arrow": {
+            "author": "Freepik",
+            "title": "arrow icons",
+            "attribution": "<a href='https://www.flaticon.com/free-icons/arrow' title='arrow icons'>Arrow icons created by Freepik - Flaticon</a>"
         }
     }
 }

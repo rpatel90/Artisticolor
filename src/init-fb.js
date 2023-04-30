@@ -9,13 +9,16 @@ require('firebase/app').initializeApp({
     measurementId: "G-JZ1H6Y93YL"
 });
 
-//Unpack firebase auth and database module
-const fbExp = { ...require('firebase/auth'), ...require('firebase/database') }
+//Load necessary firebase libraries
+const fbExp = { ...require('firebase/auth'), ...require('firebase/database') };
 
-//Export Firebase object containing all necessary firebase operations 
+//Export loaded libraries & initialization functions
 module.exports = {
     ...fbExp,
     auth: fbExp.getAuth(),
+    db: fbExp.getDatabase(),
     database: fbExp.ref(fbExp.getDatabase()),
-    init: () => { for (const key in module.exports) { window[key] = module.exports[key] } },
+    db: fbExp.getDatabase(),
+    //Globalize exported data
+    init: () => { for (const key in module.exports) { global[key] = module.exports[key] } }
 }

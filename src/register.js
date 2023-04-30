@@ -2,23 +2,12 @@ require('./init-fb').init();
 const CryptoJS = require('crypto-js');
 
 //Show register box
-document.getElementById('login-box').style.transform = 'scale(1)';
 document.getElementById('login-box').style.transition = '0s';
+document.getElementById('login-box').style.transform = 'scale(1)';
 document.getElementById('login-box').style.top = '0px';
 
 document.getElementById('submit').addEventListener('click', function() {
 	
-	function randomKey() {
-		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-		const charsLen = chars.length;
-		const rlen = Math.floor((Math.random() * 15) + 10)
-		let result = ' ';
-		for (let i = 0; i < rlen; i++) {
-			result += chars.charAt(Math.floor(Math.random() * charsLen));
-		}
-		return result;
-	}
-
 	//Get email, username, & password boxes
 	const email = document.getElementById('email');
 	const username = document.getElementById('username');
@@ -37,11 +26,22 @@ document.getElementById('submit').addEventListener('click', function() {
 		return;
 	}
 	
+	//Generate random encryption key
+	function randomKey() {
+		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		const charsLen = chars.length;
+		const rlen = Math.floor((Math.random() * 15) + 10)
+		let result = ' ';
+		for (let i = 0; i < rlen; i++) {
+			result += chars.charAt(Math.floor(Math.random() * charsLen));
+		}
+		return result;
+	}
+
 	//Create a user and add user to database
-	fb.Auth.createUserWithEmailAndPassword(fb.auth, email.value, password.value).then((userCredential) => {
+	createUserWithEmailAndPassword(auth, email.value, password.value).then((userCredential) => {
 		
 		const user = userCredential.user;
-		const uid = user.uid;
 
 		const KEY = randomKey();
 
@@ -49,21 +49,22 @@ document.getElementById('submit').addEventListener('click', function() {
 		const encryptedEmail = CryptoJS.AES.encrypt(email.value, KEY);
 		const encryptedUsername = CryptoJS.AES.encrypt(username.value, KEY);
 		const encryptedPassword = CryptoJS.AES.encrypt(password.value, KEY);
-
+		
 		// Set user display name
-		fb.Auth.updateProfile(user, {
-			displayName: username.value
+		updateProfile(user, {
+			displayName: username.value,
+			photoURL: 'http://127.0.0.1:5500/icons/usercon.png'
 		});
 
 		// Add data to database
-		fb.Db.set(fb.Db.ref(fb.database, `Users/${uid}`), {
+		set(ref(db, `Users/${user.uid}`), {
 			Username: encryptedUsername.toString(),
 			Email: encryptedEmail.toString(),
 			Password: encryptedPassword.toString(),
 			Key: KEY
 		});
-		
-		location.href = './home.html'
+
+		location.href = '../index.html'
 	}).catch((error) => {
 		const errorcode = error.code
 

@@ -1,16 +1,18 @@
 const path = require('path')
 const FBROOT = "./src/init-fb";
 
-module.exports = [ //Bundles
+//Bundles
+module.exports = [
     /*
     * ALL BUNDLES HAVE FBROOT BUNDLED BY DEFAULT
     */
+   
     // home.js
     {
-        entry: [FBROOT, "/src/home", "/src/login", "/src/listener"],
+        entry: [FBROOT, "/src/index", "/src/login", "/src/listener"],
         output: {
             path: path.resolve(__dirname, "dist"),
-            filename: "home.js"
+            filename: "index.js"
         }
     },
     // profile.js
@@ -29,5 +31,13 @@ module.exports = [ //Bundles
             filename: "register.js"
         }
     },
+    // projects.js
+    {
+        entry: [FBROOT, "/src/projects", "/src/login", "/src/listener"],
+        output: {
+            path: path.resolve(__dirname, "dist"),
+            filename: "projects.js"
+        }
+    }
     
 ];

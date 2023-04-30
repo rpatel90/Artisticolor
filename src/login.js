@@ -3,29 +3,27 @@ require('./init-fb').init();
 onAuthStateChanged(auth, (user) => {
     if(user) {
         console.log(user);
-
-        //Get header element
-        const navBar = document.getElementById('navigation');
+        user.photoURL = 'http://127.0.0.1:5500/icons/usercon.png';
 
         //Create element to display user username
         const aElement = document.createElement('a');
         aElement.setAttribute('id', 'displayName');
-        aElement.classList.add('userDisplay')
+        aElement.classList.add('userDisplay');
         
         //Display user display name
         document.getElementById('lgnButton').remove();
-        aElement.textContent = user.displayName;
-        navBar.appendChild(aElement);
+        aElement.innerHTML = user.displayName + '<img src="/icons/dropdown-arrow.png" id="dropdown-arrow" height="20px">';
+        document.getElementById('navigation').appendChild(aElement);
 
         //Close login window
-        const close = document.getElementById('close');
-        close.click();
+        document.getElementById('close').click();
 
         //If userdata box exists then shorten height of userData box
         if(document.getElementById('userData')) {
             document.getElementById('userData').style.height = 'calc(var(--accBoxHeight) / 800 * 100%)';
         }
     } else {
+        document.getElementById('sub-menu-wrap').style.display = 'none'
         //Sign in user when login button is pressed
         document.getElementById('login-box').style.transform = 'scale(0)';
 
@@ -45,16 +43,23 @@ onAuthStateChanged(auth, (user) => {
             //Login user
             signInWithEmailAndPassword(auth, email.value, password.value).then(() => {
                 //Close login window
-                const close = document.getElementById('close');
-                close.click();
-            }).catch(() => {
+                document.getElementById('close').click();
+            }).catch((error) => {
                 //Shake input boxes
-                const loginInputs = document.getElementsByClassName('lgnBoxInput');
-                loginInputs.classList.add('error');
-                setTimeout(() => { loginInputs.classList.remove('error') }, 500);
-                
+                email.classList.add('error');
+                password.classList.add('error');
+                setTimeout(() => {
+                    email.classList.remove('error');
+                    password.classList.remove('error');
+                }, 500);
+
                 //Display error message
                 document.getElementById('message').innerHTML = 'Invalid email or password';
+
+                if(error.code = 'auth/user-not-found') {
+                    document.getElementById('message').innerHTML = 'Invalid email or password';
+                    return;
+                }
             });
         });
     }

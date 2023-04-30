@@ -1,0 +1,56 @@
+.createProject {
+    background: linear-gradient(
+        45deg,rgba(0, 108, 224, 0.483), rgba(103, 16, 210, 0.546)
+    );
+    position: absolute;
+    top: 0px;
+    left: 0;
+    height: 400px;
+    width: 100%;
+}
+.makeProjectMessage {
+    margin: 210px auto;
+    background: none;
+    outline: solid 2px #458acf;
+    box-shadow: 2px 5px 5px #515151;
+    background: #7a9eeb;
+    border-radius: 10px;
+    height: 100px;
+    width: 450px;
+    padding-left: 45px;
+}
+.projectLabel {
+    margin-top: 410px;
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    /*border: solid 1px red;*/
+}
+#projectLabel {
+    margin: auto;
+}
+
+#p {
+    font-size: 24px;
+    text-align: left;
+    line-height: 100px;
+    font-family: Comic Sans Ms;
+    color: rgb(116, 20, 206);
+}
+#createNew {
+    position: relative;
+    top: -100px;
+    right: -320px;
+    height: 50px;
+    width: 50px;
+    transform: scale(1);
+    transition: 0.3s;
+}
+#createNew:hover {
+    transform: scale(1.1);
+}
+
+#makeProjectBtn {
+    background: transparent;
+    border: none;
+}

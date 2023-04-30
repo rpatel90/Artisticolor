@@ -4,48 +4,90 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/home.css">
     <link rel="stylesheet" href="../css/lgnregBox.css">
     <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/projects.css">
 
-    <script type="module" src="../dist/home.js"></script>
-    <script type="module" src="../dist/login.js"></script>
+    <script type="module" src="../dist/projects.js"></script>
 
     <title>Projects</title>
 </head>
 <body>
     <header class="bar">
-        <h1 class="webname">Artisticolor</h1>
+        <div class="logoDisplay">
+            <img id="logo" src="../icons/Logo.png">
+            <h1 class="webname" onclick="location.href='../index.html'">Artisticolor</h1>
+        </div>
         
-        <!--Nav bar-->
         <nav id="navigation">
-            <a class="nava" href="../html/home.html">Home</a>
-            <a class="nava" href="../html/profile.html">Profile</a>
+            <a class="nava" href="../index.html">Home</a>
+            <a class="nava" href="profile.html">Profile</a>
             <button id="lgnButton" class="btnLogin">Login</button>
         </nav>
+
+        <div id="sub-menu-wrap" class="sub-menu-wrap">
+            <div class="submenu">
+                <div class="user-info">
+                    <img id="user-img" src="../icons/usercon.png" alt="">
+                    <h3>User</h3>
+                </div>
+            </div>
+
+            <a href="#" class="sub-menu-link" id="menu-item-1">
+                <img src="/icons/user.png" height="26px">
+                <p>Profile</p>
+                <img src="/icons/right-arrow.png" id="menu-img-1" class="right-arrow">
+            </a>
+            <a href="#" class="sub-menu-link" id="menu-item-2">
+                <img src="/icons/gear.png" height="26px">
+                <p>Settings</p>
+                <img src="/icons/right-arrow.png" id="menu-img-2" class="right-arrow">
+            </a>
+            <a href="#" class="sub-menu-link" id="menu-item-3">
+                <img src="/icons/help.png" height="26px">
+                <p>Help</p>
+                <img src="/icons/right-arrow.png" id="menu-img-3" class="right-arrow">
+            </a>
+            <a href="#" class="sub-menu-link" id="menu-item-4">
+                <img src="/icons/logout.png" height="23px" style="margin-left: 4px;">
+                <p>Logout</p>
+            </a>
+        </div>
     </header>
+
+    <div class="createProject">
+        <div class="makeProjectMessage">
+            <p id="p">Create your own Project! <span>→</span></p>
+            <button id="makeProjectBtn"><img id="createNew" src="../icons/create-new.png"></button>
+        </div>
+    </div>
+
+    <div class="projectLabel">
+        <h2 id="projectLabel">Projects</h2>
+    </div>
 
     <form id="login-box">
         <h1>Login</h1>
         
         <button id="close"><img src="../icons/close.png" alt="close" height="35px"></button>
-
+        
         <div class="wraps">
             <label id="emailLabel">Email</label>
             <input type="email" id="email" class="lgnBoxInput" autocomplete="email">
         </div>
-
+        
         <div class="wraps">
             <label id="passwordLabel">Password</label>
             <input type="password" id="password" class="lgnBoxInput" autocomplete="current-password">
         </div>
-
+        
         <p id="message"></p>
-
+        
         <button id="login" type="submit">Login &#8594;</button>
-
+        
         <p>Don't have an account? <a href="../html/register.html">Register</a></p>    
     </form>
+
     
 </body>
 </html>

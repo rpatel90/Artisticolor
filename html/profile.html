@@ -13,15 +13,47 @@
     
     <title>Profile</title>
 </head>
-<body onload="">
-    <header class="bar" id="headBar">
-        <h1 class="webname">Artisticolor</h1>
-
+<body>
+    <header class="bar">
+        <div class="logoDisplay">
+            <img id="logo" src="../icons/Logo.png">
+            <h1 class="webname" onclick="location.href='../index.html'">Artisticolor</h1>
+        </div>
+    
         <nav id="navigation">
-            <a class="nava" href="../html/home.html">Home</a>
-            <a class="nava" href="../html/projects.html">Projects</a>
+            <a class="nava" href="../index.html">Home</a>
+            <a class="nava" href="projects.html">Projects</a>
             <button id="lgnButton" class="btnLogin">Login</button>
         </nav>
+    
+        <div id="sub-menu-wrap" class="sub-menu-wrap">
+            <div class="submenu">
+                <div class="user-info">
+                    <img id="user-img" src="../icons/usercon.png" alt="">
+                    <h3>User</h3>
+                </div>
+            </div>
+    
+            <a href="#" class="sub-menu-link" id="menu-item-1">
+                <img src="/icons/user.png" height="26px">
+                <p>Profile</p>
+                <img src="/icons/right-arrow.png" id="menu-img-1" class="right-arrow">
+            </a>
+            <a href="#" class="sub-menu-link" id="menu-item-2">
+                <img src="/icons/gear.png" height="26px">
+                <p>Settings</p>
+                <img src="/icons/right-arrow.png" id="menu-img-2" class="right-arrow">
+            </a>
+            <a href="#" class="sub-menu-link" id="menu-item-3">
+                <img src="/icons/help.png" height="26px">
+                <p>Help</p>
+                <img src="/icons/right-arrow.png" id="menu-img-3" class="right-arrow">
+            </a>
+            <a href="#" class="sub-menu-link" id="menu-item-4">
+                <img src="/icons/logout.png" height="23px" style="margin-left: 4px;">
+                <p>Logout</p>
+            </a>
+        </div>
     </header>
     
     <form id="login-box">
@@ -47,7 +79,7 @@
     </form>
 
     <div id="passwordPromptDiv">
-        <button id="passwordClose"><img id="passwordCloseImg" src="../icons/passwordClose.png"></button>
+        <button id="passwordClose" class="promptClose"><img id="passwordCloseImg" src="../icons/passwordClose.png"></button>
         <label id="promptLabel">Enter Your Password</label>
         <input type="password" id="passwordPrompt">
         
@@ -64,19 +96,19 @@
             
             <div class="email">
                 <label class="labels">Email:</label>
-                <input type="email" class="dataElements" id="aEmail" autocomplete="email" readonly>
+                <input type="email" class="dataElements" id="Email" autocomplete="email" readonly>
                 <img id="emIcon" src="../icons/email.png" height="22px">
             </div>
 
             <div class="username">
                 <label class="labels">Username:</label>
-                <input type="text" class="dataElements" id="aUsername" autocomplete="username" readonly>
+                <input type="text" class="dataElements" id="Username" autocomplete="username" readonly>
                 <img id="urIcon" src="../icons/user.png" height="22px">
             </div> 
 
             <div class="password"> 
                 <label class="labels">Password:</label>
-                <input type="password" class="dataElements" id="aPasswd" autocomplete="current-password" readonly>
+                <input type="password" class="dataElements" id="Passwd" autocomplete="current-password" readonly>
                 <img id="pdIcon" src="../icons/closedEye.png" height="22px">
             </div>
             <button type="submit" id="logout">Log Out</button>

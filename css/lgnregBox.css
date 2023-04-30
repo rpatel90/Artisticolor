@@ -4,7 +4,9 @@
     height: 470px;
     padding: 30px;
     text-align: center;
-    background: linear-gradient(90deg, rgb(92, 95, 255), rgb(154, 188, 247));
+    background: linear-gradient(
+        90deg, rgb(92, 95, 255), rgb(154, 188, 247)
+    );
     border-radius: 20px;
     transform: scale(0);
     transition: 0.2s;

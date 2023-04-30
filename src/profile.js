@@ -1,39 +1,40 @@
 require('./init-fb').init();
+
+//Load crypto library
 const CryptoJS = require('crypto-js');
-    
+
 onAuthStateChanged(auth, (user) => {
     if(user) { //User is logged in
-        //Decrypt user password from database and to display
-        get(child(database, `Users/${user.uid}/Password`)).then((pwd) => {
-            get(child(database, `Users/${user.uid}/Key`)).then((key) => {
-                //Decrypt password
-                const KEY = key.val();
-                const decrypted = CryptoJS.AES.decrypt(pwd.val(), KEY)
-                const passwdDisplay = decrypted.toString(CryptoJS.enc.Utf8)
-    
-                //Display password
-                document.getElementById('aPasswd').value = passwdDisplay;
-            }); 
-        });
-        
         //Sign user out from account if Log out button pressed
         document.getElementById('logout').addEventListener('click', () => {
-            signOut(auth).then(() => { location.href = 'home.html' });
+            signOut(auth).then(() => { location.href = '../index.html' });
+        });
+        
+        //Get and return user password and decryption key
+        async function getData() {
+            const PWD = await get(ref(db, `Users/${user.uid}/Password`));
+            const KEY = await get(ref(db, `Users/${user.uid}/Key`));
+
+            //Return the values of each DataSnapshot as an array
+            return [ PWD.val(), KEY.val() ];
+        }
+
+        //Decrypt user password
+        const decryptPassword = getData().then((data) => {
+            return CryptoJS.AES.decrypt(data[0], data[1]).toString(CryptoJS.enc.Utf8);
         });
 
+        decryptPassword.then((password) => { document.getElementById('Passwd').value = password; });
+        
         //Create img element to display user profile photo 
         const imgEl = document.createElement('img');
         imgEl.setAttribute('id', 'profilePhoto');
         imgEl.setAttribute('src', user.photoURL);
-        imgEl.style.height = '130px';
-        imgEl.style.width = '130px';
-        imgEl.style.margin = 'auto';
-        imgEl.style.marginBottom = '-40px';
-        document.getElementById('header').appendChild(imgEl); 
+        document.getElementById('header').appendChild(imgEl);
 
         //Display username and email
-        document.getElementById('aEmail').value = user.email;
-        document.getElementById('aUsername').value = user.displayName;
+        document.getElementById('Email').value = user.email;
+        document.getElementById('Username').value = user.displayName;
 
         //Get password icon element
         const pd = document.getElementById('pdIcon');
@@ -46,11 +47,12 @@ onAuthStateChanged(auth, (user) => {
         coverDiv.setAttribute('class', 'promptClose');
 
         //Add event listener to password icon
-        pd.addEventListener('click', (e) => {
+        pd.addEventListener('click', () => {
             if(pd.src == 'http://127.0.0.1:5500/icons/closedEye.png') {
 
                 //Show the password confirmation prompt
                 document.getElementById('passwordPromptDiv').style.transform = 'scale(1)';
+
                 //Add coverDiv to body
                 document.body.appendChild(coverDiv);
 
@@ -71,16 +73,15 @@ onAuthStateChanged(auth, (user) => {
 
                 //Check if confirm button is clicked
                 document.getElementById('promptButton').addEventListener('click', (e) => {
-                    //Stop page refresh
                     e.preventDefault();
 
                     //Check if password
-                    get(child(database, `Users/${user.uid}/Password`)).then(() => {
+                    decryptPassword.then((password) => {
                         //If user confirms with correct password, display password and show open eye
-                        if (document.getElementById('passwordPrompt').value == document.getElementById('aPasswd').value) {
+                        if(document.getElementById('passwordPrompt').value == password) {
                             //Show password and set eye image to open
                             pd.setAttribute('src', '../icons/openEye.png');
-                            document.getElementById('aPasswd').setAttribute('type', 'text');
+                            document.getElementById('Passwd').setAttribute('type', 'text');
 
                             //Remove password prompt
                             coverDiv.remove();
@@ -93,24 +94,23 @@ onAuthStateChanged(auth, (user) => {
                             document.getElementById('promptMessage').innerHTML = 'Incorrect Password'
 
                             //Shake box
-                            document.getElementById('passwordPrompt').classList.add('error')
-                            setTimeout(function () {
-                                document.getElementById('passwordPrompt').classList.remove('error');
-                            }, 500)
+                            document.getElementById('passwordPrompt').classList.add('error');
+                            setTimeout(() => { document.getElementById('passwordPrompt').classList.remove('error'); }, 500)
                         }
                     });
                 });
             }
-            setTimeout((e) => {
+            setTimeout(() => {
                 //If eye image is open, change to closed and hide password
                 if (pd.src == 'http://127.0.0.1:5500/icons/openEye.png') {
                     pd.setAttribute('src', '../icons/closedEye.png');
-                    document.getElementById('aPasswd').setAttribute('type', 'password')
+                    document.getElementById('Passwd').setAttribute('type', 'password')
                     return;
                 }
             }, 100)
         });
-    } else { //User not logged in
+    } else { //No user logged in
+        //Shorten the size of userData box
         document.getElementById('userData').style.height = 'calc(400 / 800 * 100%)';
     }
 });
