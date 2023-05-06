@@ -113,6 +113,6 @@ onAuthStateChanged(auth, (user) => {
 });
 
 //Load styles
-const lgnregBox = require('../styles/lgnregBox.css'),
-    nav = require('../styles/nav.css'),
-    profile = require('../styles/profile.css')
+const lgnregBox = require('../assets/styles/lgnregBox.css'),
+    nav = require('../assets/styles/nav.css'),
+    profile = require('../assets/styles/profile.css')

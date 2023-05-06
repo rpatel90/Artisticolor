@@ -66,5 +66,5 @@ document.getElementById('password').addEventListener('focus', () => {
 });
 
 //Load styles
-const register = require('../styles/register.css'),
-	lgnregBox = require('../styles/lgnregBox.css')
+const register = require('../assets/styles/register.css'),
+	lgnregBox = require('../assets/styles/lgnregBox.css')

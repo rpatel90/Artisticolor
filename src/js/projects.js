@@ -5,6 +5,6 @@ document.getElementById('makeProjectBtn').addEventListener('click', () => {
 });
 
 //Load styles
-const lgnregBox = require('../styles/lgnregBox.css'),
-    nav = require('../styles/nav.css'),
-    projects = require('../styles/projects.css')
+const lgnregBox = require('../assets/styles/lgnregBox.css'),
+    nav = require('../assets/styles/nav.css'),
+    projects = require('../assets/styles/projects.css')

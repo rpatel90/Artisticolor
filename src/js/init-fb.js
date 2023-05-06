@@ -22,8 +22,3 @@ module.exports = {
     //Globalize exported data
     init: () => { for (const key in module.exports) { global[key] = module.exports[key] } }
 }
-
-if(window.location.href.includes('register')) {
-    document.body.style.backgroundImage = 'url(../images/back.png)';
-    document.body.style.backgroundSize = 'cover';
-}
