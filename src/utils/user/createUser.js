@@ -32,13 +32,13 @@ module.exports = function createUser(auth, email, username, password) {
     }).catch((error) => {
         const errorcode = error.code
 
-        if (errorcode == 'auth/invalid-email') {
+        if(errorcode == 'auth/invalid-email') {
             message.innerHTML = 'Please enter a valid email';
 
             email.classList.add('error');
             setTimeout(email.classList.remove('error'), 500);
         }
-        if (errorcode == 'auth/email-already-in-use') message.innerHTML = 'Email is currently in use'
-        if (errorcode == 'auth/weak-password') message.innerHTML = 'Password should be at least 6 characters'
+        if(errorcode == 'auth/email-already-in-use') message.innerHTML = 'Email is currently in use'
+        if(errorcode == 'auth/weak-password') message.innerHTML = 'Password should be at least 6 characters'
     })
 };
