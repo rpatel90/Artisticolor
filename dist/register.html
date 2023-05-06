@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="module" src="register.js"></script>
+
+    <title>Sign Up</title>
+<script defer src="register.js"></script><link href="register.css" rel="stylesheet"></head>
+<body>
+    <form id="login-box" onsubmit="return false">
+        <h1>Sign Up</h1>
+        
+        <!--Enter email, username, password-->
+        <div class="email wraps">
+            <label id="emailLabel">Email</label>
+            <input type="email" name="em" id="email" required autocomplete="email">
+        </div>
+        
+        <div class="username wraps">
+            <label id="usernameLabel">Username</label>
+            <input type="text" name="usr" id="username" required autocomplete="username">
+        </div>
+
+        <div class="password wraps">
+            <label id="passwordLabel">Password</label>
+            <input type="password" name="passwd" id="password" required autocomplete="current-password">
+        </div>
+        <p id="message"></p>
+        
+        <button id="submit" type="submit" name="sgnup">Create Account</button>
+
+        <p>Already have an account? <a href="../index.html">Login</a></p>
+    </form>
+</body>
+</html>

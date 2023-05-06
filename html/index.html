@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="module" src="index.js"></script>
+
+    <title>Home</title>
+</head>
+<body>
+    <header class="bar">
+        <div class="logoDisplay">
+            <img id="logo" src="../icons/Logo.png">
+            <h1 class="webname" onclick="location.href='../index.html'">Artisticolor</h1>
+        </div>
+    
+        <nav id="navigation">
+            <a class="nava" href="projects.html">Projects</a>
+            <a class="nava" href="profile.html">Profile</a>
+            <button id="lgnButton" class="btnLogin">Login</button>
+            
+            <!--
+            <div id="sub-menu-wrap" class="sub-menu-wrap">
+               
+                <div class="menu-link-wrap">
+                    
+                    <a href="" class="sub-menu-link dropdown_item-1" id="menu-item-1">
+                        <img src="/icons/user.png" height="26px">
+                        <p>Profile</p>
+                        <img src="/icons/right-arrow.png" id="menu-img-1" class="right-arrow">
+                    </a>
+                    <a href="" class="sub-menu-link dropdown_item-2" id="menu-item-2">
+                        <img src="/icons/gear.png" height="26px">
+                        <p>Settings</p>
+                        <img src="/icons/right-arrow.png" id="menu-img-2" class="right-arrow">
+                    </a>
+                    <a href="" class="sub-menu-link dropdown_item-3 " id="menu-item-3">
+                        <img src="/icons/help.png" height="26px">
+                        <p>Help</p>
+                        <img src="/icons/right-arrow.png" id="menu-img-3" class="right-arrow">
+                    </a>
+                    <a href="" class="sub-menu-link dropdown_item-4" id="menu-item-4">
+                        <img src="/icons/logout.png" height="23px" style="margin-left: 4px;">
+                        <p>Logout</p>
+                    </a>
+                </div>
+            </div>
+            -->
+        </nav>
+    
+        
+    </header>
+
+    <!--<img id="userIcon" src="">-->
+
+    <form id="login-box">
+        <h1>Login</h1>
+        
+        <button id="close"><img src="../icons/close.png" alt="close" height="35px"></button>
+
+        <div class="wraps">
+            <label id="emailLabel">Email</label>
+            <input type="email" id="email" class="lgnBoxInput" autocomplete="email">
+        </div>
+
+        <div class="wraps">
+            <label id="passwordLabel">Password</label>
+            <input type="password" id="password" class="lgnBoxInput" autocomplete="current-password">
+        </div>
+
+        <p id="message"></p>
+
+        <button id="login" type="submit">Login &#8594;</button>
+
+        <p>Don't have an account? <a href="register.html">Register</a></p>    
+    </form>
+</body>
+</html>

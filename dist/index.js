@@ -119,6 +119,39 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\n\n
 
 /***/ }),
 
+/***/ "./src/styles/home.css":
+/*!*****************************!*\
+  !*** ./src/styles/home.css ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://artisticolor/./src/styles/home.css?");
+
+/***/ }),
+
+/***/ "./src/styles/lgnregBox.css":
+/*!**********************************!*\
+  !*** ./src/styles/lgnregBox.css ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://artisticolor/./src/styles/lgnregBox.css?");
+
+/***/ }),
+
+/***/ "./src/styles/nav.css":
+/*!****************************!*\
+  !*** ./src/styles/nav.css ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://artisticolor/./src/styles/nav.css?");
+
+/***/ }),
+
 /***/ "./node_modules/tslib/tslib.es6.js":
 /*!*****************************************!*\
   !*** ./node_modules/tslib/tslib.es6.js ***!
@@ -130,43 +163,43 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
+/***/ "./src/js/index.js":
+/*!*************************!*\
+  !*** ./src/js/index.js ***!
+  \*************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("(__webpack_require__(/*! ./init-fb */ \"./src/init-fb.js\").init)();\n\n//# sourceURL=webpack://artisticolor/./src/index.js?");
+eval("(__webpack_require__(/*! ./init-fb */ \"./src/js/init-fb.js\").init)();\n\n\n\n//Load styles\nconst home = __webpack_require__(/*! ../styles/home.css */ \"./src/styles/home.css\"),\n    lgnregBox = __webpack_require__(/*! ../styles/lgnregBox.css */ \"./src/styles/lgnregBox.css\"),\n    nav = __webpack_require__(/*! ../styles/nav.css */ \"./src/styles/nav.css\")\n\n//# sourceURL=webpack://artisticolor/./src/js/index.js?");
 
 /***/ }),
 
-/***/ "./src/init-fb.js":
-/*!************************!*\
-  !*** ./src/init-fb.js ***!
-  \************************/
+/***/ "./src/js/init-fb.js":
+/*!***************************!*\
+  !*** ./src/js/init-fb.js ***!
+  \***************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("(__webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/index.cjs.js\").initializeApp)({\n    apiKey: \"AIzaSyC0AlemsEruFplUQFL5DVRg6oQtmfrhz_I\",\n    authDomain: \"artisticolor-a55cf.firebaseapp.com\",\n    databaseURL: \"https://artisticolor-a55cf-default-rtdb.firebaseio.com\",\n    projectId: \"artisticolor-a55cf\",\n    storageBucket: \"artisticolor-a55cf.appspot.com\",\n    messagingSenderId: \"777420719697\",\n    appId: \"1:777420719697:web:55131e8a4f5144f1891a70\",\n    measurementId: \"G-JZ1H6Y93YL\"\n});\n\n//Load necessary firebase libraries\nconst fbExp = { ...__webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/index.cjs.js\"), ...__webpack_require__(/*! firebase/database */ \"./node_modules/firebase/database/dist/index.cjs.js\") };\n\n//Export loaded libraries & initialization functions\nmodule.exports = {\n    ...fbExp,\n    auth: fbExp.getAuth(),\n    db: fbExp.getDatabase(),\n    database: fbExp.ref(fbExp.getDatabase()),\n    db: fbExp.getDatabase(),\n    //Globalize exported data\n    init: () => { for (const key in module.exports) { __webpack_require__.g[key] = module.exports[key] } }\n}\n\n//# sourceURL=webpack://artisticolor/./src/init-fb.js?");
+eval("(__webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/index.cjs.js\").initializeApp)({\n    apiKey: \"AIzaSyC0AlemsEruFplUQFL5DVRg6oQtmfrhz_I\",\n    authDomain: \"artisticolor-a55cf.firebaseapp.com\",\n    databaseURL: \"https://artisticolor-a55cf-default-rtdb.firebaseio.com\",\n    projectId: \"artisticolor-a55cf\",\n    storageBucket: \"artisticolor-a55cf.appspot.com\",\n    messagingSenderId: \"777420719697\",\n    appId: \"1:777420719697:web:55131e8a4f5144f1891a70\",\n    measurementId: \"G-JZ1H6Y93YL\"\n});\n\n//Load necessary firebase libraries\nconst fbExp = { ...__webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/index.cjs.js\"), ...__webpack_require__(/*! firebase/database */ \"./node_modules/firebase/database/dist/index.cjs.js\") };\n\n//Export loaded libraries & initialization functions\nmodule.exports = {\n    ...fbExp,\n    auth: fbExp.getAuth(),\n    db: fbExp.getDatabase(),\n    database: fbExp.ref(fbExp.getDatabase()),\n    db: fbExp.getDatabase(),\n    //Globalize exported data\n    init: () => { for (const key in module.exports) { __webpack_require__.g[key] = module.exports[key] } }\n}\n\nif(window.location.href.includes('register')) {\n    document.body.style.backgroundImage = 'url(../images/back.png)';\n    document.body.style.backgroundSize = 'cover';\n}\n\n//# sourceURL=webpack://artisticolor/./src/js/init-fb.js?");
 
 /***/ }),
 
-/***/ "./src/listener.js":
-/*!*************************!*\
-  !*** ./src/listener.js ***!
-  \*************************/
+/***/ "./src/js/listener.js":
+/*!****************************!*\
+  !*** ./src/js/listener.js ***!
+  \****************************/
 /***/ (() => {
 
-eval("//Open / close login-box\ndocument.getElementById('lgnButton').addEventListener('click', function () {\n    document.getElementById('login-box').style.transform = 'scale(1)';\n});\ndocument.getElementById('close').addEventListener('click', (e) => {\n    e.preventDefault();\n    document.getElementById('login-box').style.transform = 'scale(0)';\n});\n\n//Move the label up when the input box is selected\ndocument.getElementById('email').addEventListener('focus', function () {\n    document.getElementById('emailLabel').style.transform = 'translateY(-200%)';\n    document.getElementById('emailLabel').style.transition = '0.25s';\n    if (document.getElementById('password').value == '') {\n        document.getElementById('passwordLabel').style.transform = 'translateY(-50%)';\n    }\n});\ndocument.getElementById('password').addEventListener('focus', function () {\n    document.getElementById('passwordLabel').style.transform = 'translateY(-200%)';\n    document.getElementById('passwordLabel').style.transition = '0.25s';\n    if (document.getElementById('email').value == '') {\n        document.getElementById('emailLabel').style.transform = 'translateY(-50%)';\n    }\n});\n\n//# sourceURL=webpack://artisticolor/./src/listener.js?");
+eval("// Open/close login-box\ndocument.getElementById('lgnButton').addEventListener('click', function () {\n    document.getElementById('login-box').style.transform = 'scale(1)';\n});\ndocument.getElementById('close').addEventListener('click', (e) => {\n    e.preventDefault();\n    document.getElementById('login-box').style.transform = 'scale(0)';\n});\n\n//Move the label up when the input box is selected\ndocument.getElementById('email').addEventListener('focus', function () {\n    document.getElementById('emailLabel').style.transform = 'translateY(-200%)';\n    document.getElementById('emailLabel').style.transition = '0.25s';\n    if (document.getElementById('password').value == '') {\n        document.getElementById('passwordLabel').style.transform = 'translateY(-50%)';\n    }\n});\ndocument.getElementById('password').addEventListener('focus', function () {\n    document.getElementById('passwordLabel').style.transform = 'translateY(-200%)';\n    document.getElementById('passwordLabel').style.transition = '0.25s';\n    if (document.getElementById('email').value == '') {\n        document.getElementById('emailLabel').style.transform = 'translateY(-50%)';\n    }\n});\n\n//# sourceURL=webpack://artisticolor/./src/js/listener.js?");
 
 /***/ }),
 
-/***/ "./src/login.js":
-/*!**********************!*\
-  !*** ./src/login.js ***!
-  \**********************/
+/***/ "./src/js/login.js":
+/*!*************************!*\
+  !*** ./src/js/login.js ***!
+  \*************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("(__webpack_require__(/*! ./init-fb */ \"./src/init-fb.js\").init)();\n\nonAuthStateChanged(auth, (user) => {\n    if(user) {\n        console.log(user);\n        user.photoURL = 'http://127.0.0.1:5500/icons/usercon.png';\n\n        //Create element to display user username\n        const aElement = document.createElement('a');\n        aElement.setAttribute('id', 'displayName');\n        aElement.classList.add('userDisplay');\n        \n        //Display user display name\n        document.getElementById('lgnButton').remove();\n        aElement.innerHTML = user.displayName + '<img src=\"/icons/dropdown-arrow.png\" id=\"dropdown-arrow\" height=\"20px\">';\n        document.getElementById('navigation').appendChild(aElement);\n\n        //Close login window\n        document.getElementById('close').click();\n\n        //If userdata box exists then shorten height of userData box\n        if(document.getElementById('userData')) {\n            document.getElementById('userData').style.height = 'calc(var(--accBoxHeight) / 800 * 100%)';\n        }\n    } else {\n        document.getElementById('sub-menu-wrap').style.display = 'none'\n        //Sign in user when login button is pressed\n        document.getElementById('login-box').style.transform = 'scale(0)';\n\n        //If login button pressed then login the user\n        document.getElementById('login').addEventListener('click', (e) => {\n            e.preventDefault();\n            \n            //Get the email and password input boxes\n            const email = document.getElementById('email');\n            const password = document.getElementById('password');\n\n            //If entered values are blank, end the function\n            if(email == '' || password == '') {\n                return;\n            }\n\n            //Login user\n            signInWithEmailAndPassword(auth, email.value, password.value).then(() => {\n                //Close login window\n                document.getElementById('close').click();\n            }).catch((error) => {\n                //Shake input boxes\n                email.classList.add('error');\n                password.classList.add('error');\n                setTimeout(() => {\n                    email.classList.remove('error');\n                    password.classList.remove('error');\n                }, 500);\n\n                //Display error message\n                document.getElementById('message').innerHTML = 'Invalid email or password';\n\n                if(error.code = 'auth/user-not-found') {\n                    document.getElementById('message').innerHTML = 'Invalid email or password';\n                    return;\n                }\n            });\n        });\n    }\n});\n\n\n\n//# sourceURL=webpack://artisticolor/./src/login.js?");
+eval("(__webpack_require__(/*! ./init-fb */ \"./src/js/init-fb.js\").init)();\n\nonAuthStateChanged(auth, (user) => {\n    if(user) {\n        console.log(user);\n        \n        user.photoURL = 'localhost:8000/icons/usercon.png';\n\n        //Create element to display user username\n        const aElement = document.createElement('a');\n        aElement.setAttribute('id', 'displayName');\n        aElement.classList.add('userDisplay');\n        \n        //Display user display name\n        document.getElementById('lgnButton').remove();\n        aElement.innerHTML = user.displayName //+ '<img src=\"/icons/dropdown-arrow.png\" id=\"dropdown-arrow\" height=\"20px\">';\n        document.getElementById('navigation').appendChild(aElement);\n\n        aElement.innerHTML = user.displayName +`\n        <div id=\"sub-menu-wrap\" class=\"sub-menu-wrap\">\n            <div class=\"menu-link-wrap\">\n                <a href=\"\" class=\"sub-menu-link dropdown_item-1\" id=\"menu-item-1\">\n                    <img src=\"/icons/user.png\" height=\"26px\">\n                    <p>Profile</p>\n                    <img src=\"/icons/right-arrow.png\" id=\"menu-img-1\" class=\"right-arrow\">\n                </a>\n                <a href=\"\" class=\"sub-menu-link dropdown_item-2\" id=\"menu-item-2\">\n                    <img src=\"/icons/gear.png\" height=\"26px\">\n                    <p>Settings</p>\n                    <img src=\"/icons/right-arrow.png\" id=\"menu-img-2\" class=\"right-arrow\">\n                </a>\n                <a href=\"\" class=\"sub-menu-link dropdown_item-3 \" id=\"menu-item-3\">\n                    <img src=\"/icons/help.png\" height=\"26px\">\n                    <p>Help</p>\n                    <img src=\"/icons/right-arrow.png\" id=\"menu-img-3\" class=\"right-arrow\">\n                </a>\n                <a href=\"\" class=\"sub-menu-link dropdown_item-4\" id=\"menu-item-4\">\n                    <img src=\"/icons/logout.png\" height=\"23px\" style=\"margin-left: 4px;\">\n                    <p>Logout</p>\n                </a>\n            </div>\n        </div>\n        `\n\n        //Close login window\n        const close = document.getElementById('close');\n        close.click();\n\n        //Shorten height of userData box if it exists\n        if(document.getElementById('userData')) {\n            document.getElementById('userData').style.height = 'calc(var(--accBoxHeight) / 800 * 100%)';\n        };\n\n        // //Control dropdown menu display\n        // aElement.addEventListener('mouseover', () => { \n        //     document.getElementById('sub-menu-wrap').style.display = 'block';\n        // });\n        // aElement.addEventListener('mouseleave', () => {\n        //     document.getElementById('sub-menu-wrap').style.display = 'none';\n        // });\n    } else {\n        //document.getElementById('sub-menu-wrap').style.display = 'none'\n        //Sign in user when login button is pressed\n        document.getElementById('login-box').style.transform = 'scale(0)';\n\n        //If login button pressed then login the user\n        document.getElementById('login').addEventListener('click', (e) => {\n            e.preventDefault();\n            \n            //Get the email and password input boxes\n            const email = document.getElementById('email');\n            const password = document.getElementById('password');\n\n            //If entered values are blank, end the function\n            if(email == '' || password == '') {\n                return;\n            }\n\n            //Login user\n            signInWithEmailAndPassword(auth, email.value, password.value)\n                .then(() => { close.click() })\n                .catch((error) => {\n                //Shake input boxes\n                email.classList.add('error');\n                password.classList.add('error');\n                setTimeout(() => {\n                    email.classList.remove('error');\n                    password.classList.remove('error');\n                }, 500);\n\n                //Display error message\n                document.getElementById('message').innerHTML = 'Invalid email or password';\n\n                if(error.code = 'auth/user-not-found') {\n                    document.getElementById('message').innerHTML = 'Invalid email or password';\n                    return;\n                }\n            });\n        });\n    }\n});\n\n//# sourceURL=webpack://artisticolor/./src/js/login.js?");
 
 /***/ }),
 
@@ -263,11 +296,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	__webpack_require__("./src/init-fb.js");
-/******/ 	__webpack_require__("./src/index.js");
-/******/ 	__webpack_require__("./src/login.js");
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/listener.js");
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	__webpack_require__("./src/js/index.js");
+/******/ 	__webpack_require__("./src/js/login.js");
+/******/ 	__webpack_require__("./src/js/listener.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/js/init-fb.js");
 /******/ 	
 /******/ })()
 ;

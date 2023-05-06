@@ -469,6 +469,28 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\n\n
 
 /***/ }),
 
+/***/ "./src/styles/lgnregBox.css":
+/*!**********************************!*\
+  !*** ./src/styles/lgnregBox.css ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://artisticolor/./src/styles/lgnregBox.css?");
+
+/***/ }),
+
+/***/ "./src/styles/register.css":
+/*!*********************************!*\
+  !*** ./src/styles/register.css ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://artisticolor/./src/styles/register.css?");
+
+/***/ }),
+
 /***/ "./node_modules/tslib/tslib.es6.js":
 /*!*****************************************!*\
   !*** ./node_modules/tslib/tslib.es6.js ***!
@@ -490,23 +512,43 @@ eval("/* (ignored) */\n\n//# sourceURL=webpack://artisticolor/crypto_(ignored)?"
 
 /***/ }),
 
-/***/ "./src/init-fb.js":
-/*!************************!*\
-  !*** ./src/init-fb.js ***!
-  \************************/
+/***/ "./src/js/init-fb.js":
+/*!***************************!*\
+  !*** ./src/js/init-fb.js ***!
+  \***************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("(__webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/index.cjs.js\").initializeApp)({\n    apiKey: \"AIzaSyC0AlemsEruFplUQFL5DVRg6oQtmfrhz_I\",\n    authDomain: \"artisticolor-a55cf.firebaseapp.com\",\n    databaseURL: \"https://artisticolor-a55cf-default-rtdb.firebaseio.com\",\n    projectId: \"artisticolor-a55cf\",\n    storageBucket: \"artisticolor-a55cf.appspot.com\",\n    messagingSenderId: \"777420719697\",\n    appId: \"1:777420719697:web:55131e8a4f5144f1891a70\",\n    measurementId: \"G-JZ1H6Y93YL\"\n});\n\n//Load necessary firebase libraries\nconst fbExp = { ...__webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/index.cjs.js\"), ...__webpack_require__(/*! firebase/database */ \"./node_modules/firebase/database/dist/index.cjs.js\") };\n\n//Export loaded libraries & initialization functions\nmodule.exports = {\n    ...fbExp,\n    auth: fbExp.getAuth(),\n    db: fbExp.getDatabase(),\n    database: fbExp.ref(fbExp.getDatabase()),\n    db: fbExp.getDatabase(),\n    //Globalize exported data\n    init: () => { for (const key in module.exports) { __webpack_require__.g[key] = module.exports[key] } }\n}\n\n//# sourceURL=webpack://artisticolor/./src/init-fb.js?");
+eval("(__webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/index.cjs.js\").initializeApp)({\n    apiKey: \"AIzaSyC0AlemsEruFplUQFL5DVRg6oQtmfrhz_I\",\n    authDomain: \"artisticolor-a55cf.firebaseapp.com\",\n    databaseURL: \"https://artisticolor-a55cf-default-rtdb.firebaseio.com\",\n    projectId: \"artisticolor-a55cf\",\n    storageBucket: \"artisticolor-a55cf.appspot.com\",\n    messagingSenderId: \"777420719697\",\n    appId: \"1:777420719697:web:55131e8a4f5144f1891a70\",\n    measurementId: \"G-JZ1H6Y93YL\"\n});\n\n//Load necessary firebase libraries\nconst fbExp = { ...__webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/index.cjs.js\"), ...__webpack_require__(/*! firebase/database */ \"./node_modules/firebase/database/dist/index.cjs.js\") };\n\n//Export loaded libraries & initialization functions\nmodule.exports = {\n    ...fbExp,\n    auth: fbExp.getAuth(),\n    db: fbExp.getDatabase(),\n    database: fbExp.ref(fbExp.getDatabase()),\n    db: fbExp.getDatabase(),\n    //Globalize exported data\n    init: () => { for (const key in module.exports) { __webpack_require__.g[key] = module.exports[key] } }\n}\n\nif(window.location.href.includes('register')) {\n    document.body.style.backgroundImage = 'url(../images/back.png)';\n    document.body.style.backgroundSize = 'cover';\n}\n\n//# sourceURL=webpack://artisticolor/./src/js/init-fb.js?");
 
 /***/ }),
 
-/***/ "./src/register.js":
-/*!*************************!*\
-  !*** ./src/register.js ***!
-  \*************************/
+/***/ "./src/js/register.js":
+/*!****************************!*\
+  !*** ./src/js/register.js ***!
+  \****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("(__webpack_require__(/*! ./init-fb */ \"./src/init-fb.js\").init)();\nconst CryptoJS = __webpack_require__(/*! crypto-js */ \"./node_modules/crypto-js/index.js\");\n\n//Show register box\ndocument.getElementById('login-box').style.transition = '0s';\ndocument.getElementById('login-box').style.transform = 'scale(1)';\ndocument.getElementById('login-box').style.top = '0px';\n\ndocument.getElementById('submit').addEventListener('click', function() {\n\t\n\t//Get email, username, & password boxes\n\tconst email = document.getElementById('email');\n\tconst username = document.getElementById('username');\n\tconst password = document.getElementById('password');\n\n\t//Get message element\n\tconst message = document.getElementById('message');\n\n\t//Check for blank inputs\n\tif(email.value == '' || username.value == '' || password.value == '') {\n\t\treturn;\n\t}\n\t//Check if username is larger than 15 characters\n\tif(username.value.length > 15) {\n\t\tmessage.innerHTML = 'Username cannot exceed 20 characters';\n\t\treturn;\n\t}\n\t\n\t//Generate random encryption key\n\tfunction randomKey() {\n\t\tconst chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\n\t\tconst charsLen = chars.length;\n\t\tconst rlen = Math.floor((Math.random() * 15) + 10)\n\t\tlet result = ' ';\n\t\tfor (let i = 0; i < rlen; i++) {\n\t\t\tresult += chars.charAt(Math.floor(Math.random() * charsLen));\n\t\t}\n\t\treturn result;\n\t}\n\n\t//Create a user and add user to database\n\tcreateUserWithEmailAndPassword(auth, email.value, password.value).then((userCredential) => {\n\t\t\n\t\tconst user = userCredential.user;\n\n\t\tconst KEY = randomKey();\n\n\t\t//Encrypt data\n\t\tconst encryptedEmail = CryptoJS.AES.encrypt(email.value, KEY);\n\t\tconst encryptedUsername = CryptoJS.AES.encrypt(username.value, KEY);\n\t\tconst encryptedPassword = CryptoJS.AES.encrypt(password.value, KEY);\n\t\t\n\t\t// Set user display name\n\t\tupdateProfile(user, {\n\t\t\tdisplayName: username.value,\n\t\t\tphotoURL: 'http://127.0.0.1:5500/icons/usercon.png'\n\t\t});\n\n\t\t// Add data to database\n\t\tset(ref(db, `Users/${user.uid}`), {\n\t\t\tUsername: encryptedUsername.toString(),\n\t\t\tEmail: encryptedEmail.toString(),\n\t\t\tPassword: encryptedPassword.toString(),\n\t\t\tKey: KEY\n\t\t});\n\n\t\tlocation.href = '../index.html'\n\t}).catch((error) => {\n\t\tconst errorcode = error.code\n\n\t\tif(errorcode == 'auth/invalid-email') {\n\t\t\tmessage.innerHTML = 'Invalid email';\n\n\t\t\temail.classList.add('error');\n            setTimeout((e) => { email.classList.remove('error') }, 500);\n\t\t}\n\t\tif(errorcode == 'auth/email-already-in-use') {\n\t\t\tmessage.innerHTML = 'Email is already in use';\n\t\t}\n\t\tif(errorcode == 'auth/weak-password') {\n\t\t\tmessage.innerHTML = 'Password should be at least 6 characters';\n\t\t}\n\t});\n\n});\n\n//Move the label up when the input box is selected\ndocument.getElementById('email').addEventListener('focus', function() {\n    document.getElementById('emailLabel').style.transform = 'translateY(-200%)';\n    document.getElementById('emailLabel').style.transition = '0.25s';\n    \n\tif(document.getElementById('username').value == '') {\n        document.getElementById('usernameLabel').style.transform = 'translateY(-50%)';\n    }\n\tif(document.getElementById('password').value == '') {\n        document.getElementById('passwordLabel').style.transform = 'translateY(-50%)';\n    }  \n});\ndocument.getElementById('username').addEventListener('focus', function() {\n    document.getElementById('usernameLabel').style.transform = 'translateY(-200%)';\n    document.getElementById('usernameLabel').style.transition = '0.25s';\n\t\n\tif(document.getElementById('email').value == '') {\n        document.getElementById('emailLabel').style.transform = 'translateY(-50%)';\n    }\n\tif(document.getElementById('password').value == '') {\n        document.getElementById('passwordLabel').style.transform = 'translateY(-50%)';\n    }  \n});\ndocument.getElementById('password').addEventListener('focus', function() {\n    document.getElementById('passwordLabel').style.transform = 'translateY(-200%)';\n    document.getElementById('passwordLabel').style.transition = '0.25s';\n    \n\tif(document.getElementById('email').value == '') {\n        document.getElementById('emailLabel').style.transform = 'translateY(-50%)';\n    }\n\tif(document.getElementById('username').value == '') {\n        document.getElementById('usernameLabel').style.transform = 'translateY(-50%)';\n    }\n});\n\n//# sourceURL=webpack://artisticolor/./src/register.js?");
+eval("(__webpack_require__(/*! ./init-fb */ \"./src/js/init-fb.js\").init)();\nconst createUser = __webpack_require__(/*! ../utils/user/createUser */ \"./src/utils/user/createUser.js\")\n\n//Show register box\ndocument.getElementById('login-box').style.transition = '0s';\ndocument.getElementById('login-box').style.transform = 'scale(1)';\ndocument.getElementById('login-box').style.top = '0px';\n\ndocument.getElementById('submit').addEventListener('click', function() {\n\t\n\t//Get email, username, & password boxes\n\tconst email = document.getElementById('email');\n\tconst username = document.getElementById('username');\n\tconst password = document.getElementById('password');\n\n\t//Get message element\n\tconst message = document.getElementById('message');\n\n\t//Check for blank inputs\n\tif(email.value == '' || username.value == '' || password.value == '') return;\n\n\t//Check if username > 15 characters\n\tif(username.value.length > 15) {\n\t\tmessage.innerHTML = 'Username cannot exceed 20 characters';\n\t\treturn;\n\t}\t\n\n\t//Create a user and add user to database\n\tcreateUser(auth, email, username, password);\n\n});\n\n//Move the label up when the input box is selected\ndocument.getElementById('email').addEventListener('focus', () => {\n    document.getElementById('emailLabel').style.transform = 'translateY(-200%)';\n    document.getElementById('emailLabel').style.transition = '0.25s';\n    \n\tif(document.getElementById('username').value == '') {\n        document.getElementById('usernameLabel').style.transform = 'translateY(-50%)';\n    }\n\tif(document.getElementById('password').value == '') {\n        document.getElementById('passwordLabel').style.transform = 'translateY(-50%)';\n    }  \n});\ndocument.getElementById('username').addEventListener('focus', () => {\n    document.getElementById('usernameLabel').style.transform = 'translateY(-200%)';\n    document.getElementById('usernameLabel').style.transition = '0.25s';\n\t\n\tif(document.getElementById('email').value == '') {\n        document.getElementById('emailLabel').style.transform = 'translateY(-50%)';\n    }\n\tif(document.getElementById('password').value == '') {\n        document.getElementById('passwordLabel').style.transform = 'translateY(-50%)';\n    }  \n});\ndocument.getElementById('password').addEventListener('focus', () => {\n    document.getElementById('passwordLabel').style.transform = 'translateY(-200%)';\n    document.getElementById('passwordLabel').style.transition = '0.25s';\n    \n\tif(document.getElementById('email').value == '') {\n        document.getElementById('emailLabel').style.transform = 'translateY(-50%)';\n    }\n\tif(document.getElementById('username').value == '') {\n        document.getElementById('usernameLabel').style.transform = 'translateY(-50%)';\n    }\n});\n\n//Load styles\nconst register = __webpack_require__(/*! ../styles/register.css */ \"./src/styles/register.css\"),\n\tlgnregBox = __webpack_require__(/*! ../styles/lgnregBox.css */ \"./src/styles/lgnregBox.css\")\n\n//# sourceURL=webpack://artisticolor/./src/js/register.js?");
+
+/***/ }),
+
+/***/ "./src/utils/user/createUser.js":
+/*!**************************************!*\
+  !*** ./src/utils/user/createUser.js ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const CryptoJS = __webpack_require__(/*! crypto-js */ \"./node_modules/crypto-js/index.js\");\nconst randomKey = __webpack_require__(/*! ./randomKey */ \"./src/utils/user/randomKey.js\");\n\nmodule.exports = function createUser(auth, email, username, password) {\n    createUserWithEmailAndPassword(auth, email.value, password.value).then((userCredential) => {\n\n        const user = userCredential.user;\n\n        const KEY = randomKey();\n\n        //Encrypt user data\n        const encryptedEmail = CryptoJS.AES.encrypt(email.value, KEY),\n            encryptedUsername = CryptoJS.AES.encrypt(username.value, KEY),\n            encryptedPassword = CryptoJS.AES.encrypt(password.value, KEY)\n\n        // Set user displayName and photoURL\n        updateProfile(user, {\n            displayName: username.value,\n            photoURL: 'http://localhost:8000/usercon.png'\n        });\n\n        // Add encrypted data to database along with key\n        set(ref(db, `Users/${user.uid}`), {\n            Username: encryptedUsername.toString(),\n            Email: encryptedEmail.toString(),\n            Password: encryptedPassword.toString(),\n            Key: KEY\n        });\n\n        //Redirect\n        location.href = 'index.html'\n    }).catch((error) => {\n        const errorcode = error.code\n\n        if (errorcode == 'auth/invalid-email') {\n            message.innerHTML = 'Please enter a valid email';\n\n            email.classList.add('error');\n            setTimeout(() => email.classList.remove('error'), 500);\n        }\n        if (errorcode == 'auth/email-already-in-use') setTimeout(() => message.innerHTML = 'Email is currently in use',500)\n        if (errorcode == 'auth/weak-password') setTimeout(() => message.innerHTML = 'Password should be at least 6 characters',500) \n    })\n};\n\n//# sourceURL=webpack://artisticolor/./src/utils/user/createUser.js?");
+
+/***/ }),
+
+/***/ "./src/utils/user/randomKey.js":
+/*!*************************************!*\
+  !*** ./src/utils/user/randomKey.js ***!
+  \*************************************/
+/***/ ((module) => {
+
+eval("module.exports = function randomKey() {\n    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\n    const charsLen = chars.length;\n    const rlen = Math.floor((Math.random() * 15) + 10)\n    let result = ' ';\n    for (let i = 0; i < rlen; i++) {\n        result += chars.charAt(Math.floor(Math.random() * charsLen));\n    }\n    return result;\n}\n\n//# sourceURL=webpack://artisticolor/./src/utils/user/randomKey.js?");
 
 /***/ }),
 
@@ -603,9 +645,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	__webpack_require__("./src/init-fb.js");
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/register.js");
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	__webpack_require__("./src/js/register.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/js/init-fb.js");
 /******/ 	
 /******/ })()
 ;
