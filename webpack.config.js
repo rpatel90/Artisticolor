@@ -1,14 +1,11 @@
 const path = require('path');
-const FBROOT = "/src/js/init-fb";
 
+//Webpack Plugins
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    /**
-    * ALL BUNDLES WILL HAVE FBROOT BUNDLED
-    */
 
     mode: 'development',
 
@@ -94,4 +91,4 @@ module.exports = {
     ], 
 };
 //Add FBROOT to all bundles
-for(const key in module.exports.entry) module.exports.entry[key].push(FBROOT);
+for (const key in module.exports.entry) module.exports.entry[key].push('/src/js/init-fb');

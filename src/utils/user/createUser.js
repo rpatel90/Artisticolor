@@ -3,16 +3,16 @@ module.exports = function createUser(auth, email, username, password) {
         
         const user = userCredential.user;
         
-        const CryptoJS = require('crypto-js');
-        const randomKey = require('./randomKey');
-
+        const randomKey = require('../crypto/randomKey');
         const KEY = randomKey();
-        
-        //Encrypt user data
-        const encryptedEmail = CryptoJS.AES.encrypt(email.value, KEY),
-            encryptedUsername = CryptoJS.AES.encrypt(username.value, KEY),
-            encryptedPassword = CryptoJS.AES.encrypt(password.value, KEY)
 
+        //Encrypt user data
+        const encryptedData = require('../crypto/encrypt')([
+            email.value,
+            username.value,
+            password.value,
+        ], KEY)
+        
         // Set user displayName and photoURL
         updateProfile(user, {
             displayName: username.value,
@@ -21,9 +21,9 @@ module.exports = function createUser(auth, email, username, password) {
 
         // Add encrypted data to database along with key
         set(ref(db, `Users/${user.uid}`), {
-            Username: encryptedUsername.toString(),
-            Email: encryptedEmail.toString(),
-            Password: encryptedPassword.toString(),
+            Username: encryptedData[0],
+            Email: encryptedData[1],
+            Password: encryptedData[2],
             Key: KEY
         });
 
@@ -31,7 +31,7 @@ module.exports = function createUser(auth, email, username, password) {
         location.href = '/'
     }).catch((error) => {
         const errorcode = error.code
-
+        
         if(errorcode == 'auth/invalid-email') {
             message.innerHTML = 'Please enter a valid email';
 

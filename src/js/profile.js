@@ -5,26 +5,25 @@ const CryptoJS = require('crypto-js');
 
 onAuthStateChanged(auth, (user) => {
     if(user) { //User is logged in
-        //Sign user out from account if Log out button pressed
+        //Sign out user from account
         document.getElementById('logout').addEventListener('click', () => {
-            signOut(auth).then(() => { location.href = '../index.html' });
+            signOut(auth).then(location.href = '../index.html');
         });
         
         //Get and return user password and decryption key
-        async function getData() {
-            const PWD = await get(ref(db, `Users/${user.uid}/Password`));
-            const KEY = await get(ref(db, `Users/${user.uid}/Key`));
-
-            //Return the values of each DataSnapshot as an array
-            return [ PWD.val(), KEY.val() ];
+        async function getPassword() {
+            return [
+                (await get(ref(db, `Users/${user.uid}/Password`))).val(),
+                (await get(ref(db, `Users/${user.uid}/Key`))).val()
+            ]
         }
 
         //Decrypt user password
-        const decryptPassword = getData().then((data) => {
-            return CryptoJS.AES.decrypt(data[0], data[1]).toString(CryptoJS.enc.Utf8);
+        const decryptPassword = getPassword().then((data) => {
+            return require('../utils/crypto/decrypt')(data[0], data[1]);
         });
 
-        decryptPassword.then((password) => { document.getElementById('Passwd').value = password; });
+        decryptPassword.then(pwd => document.getElementById('Passwd').value = pwd );
         
         //Create img element to display user profile photo 
         const imgEl = document.createElement('img');
@@ -48,9 +47,9 @@ onAuthStateChanged(auth, (user) => {
 
         //Add event listener to password icon
         pd.addEventListener('click', () => {
-            if(pd.src == 'http://localhost:8000/icons/closedEye.png') {
+            if (pd.src === 'http://localhost:8000/icons/closedEye.png') {
 
-                //Show the password confirmation prompt
+            //Show the password confirmation prompt
                 document.getElementById('passwordPromptDiv').style.transform = 'scale(1)';
 
                 //Add coverDiv to body
@@ -58,15 +57,9 @@ onAuthStateChanged(auth, (user) => {
 
                 const removeCoverDiv = () => { eval("try{document.getElementById('cover').remove()}catch{};document.getElementById('passwordPromptDiv').style.transform='scale(0)';", "return;") }
 
-                //Add event listener to close button and coverDiv
-                document.getElementById('passwordClose').addEventListener('click', () => {
-                    //Close the prompt and remove coverDiv from body
-                    removeCoverDiv();
-                });
-                coverDiv.addEventListener('click', () => {
-                    //Close the prompt and remove coverDiv from body
-                    removeCoverDiv();
-                });
+                //Add event listener to close button and coverDiv      
+                document.getElementById('passwordClose').addEventListener('click', removeCoverDiv);
+                coverDiv.addEventListener('click', removeCoverDiv);
 
                 //Check if confirm button is clicked
                 document.getElementById('promptButton').addEventListener('click', (e) => {
@@ -92,7 +85,7 @@ onAuthStateChanged(auth, (user) => {
 
                             //Shake box
                             document.getElementById('passwordPrompt').classList.add('error');
-                            setTimeout(() => { document.getElementById('passwordPrompt').classList.remove('error'); }, 500)
+                            setTimeout(document.getElementById('passwordPrompt').classList.remove('error'), 500)
                         }
                     });
                 });
@@ -106,13 +99,13 @@ onAuthStateChanged(auth, (user) => {
                 }
             }, 100)
         });
-    } else { //No user logged in
+    } else { //No user
         //Shorten the size of userData box
         document.getElementById('userData').style.height = 'calc(400 / 800 * 100%)';
     }
 });
 
 //Load styles
-const lgnregBox = require('../assets/styles/lgnregBox.css'),
-    nav = require('../assets/styles/nav.css'),
-    profile = require('../assets/styles/profile.css')
+const lgnregBox = require('styles/lgnregBox.css'),
+    nav = require('styles/nav.css'),
+    profile = require('styles/profile.css')
