@@ -1,6 +1,6 @@
-require('./init-fb').init();
+require('./init').init();
 
-document.getElementById('makeProjectBtn').addEventListener('click', () => {
+getElement('makeProjectBtn').addEventListener('click', () => {
     console.log('Hello World')
 });
 

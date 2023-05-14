@@ -4,31 +4,43 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 
 module.exports = {
 
     mode: 'development',
 
-    devServer: {
-        static: 'dist',
-        client: { logging: 'error' },
-        compress: true,
-        port: 8000
-    },
+    // devServer: {
+    //     static: 'dist',
+    //     client: { logging: 'error' },
+    //     compress: true,
+    //     port: 8000,
+    // },
     
+
+
     resolve: {
+        fallback: {
+            //fs: require.resolve('browserify-fs'),
+            //path: require.resolve('path-browserify')
+        },
         alias: {
-            styles: path.resolve(__dirname, 'src/assets/styles')
+            js: path.resolve(__dirname, 'src/js'),
+            styles: path.resolve(__dirname, 'src/assets/styles'),
+            utils: path.resolve(__dirname, 'src/utils'),
+            anim: path.resolve(__dirname, 'src/utils/anim'),
+            error: path.resolve(__dirname, 'src/utils/anim/error'),
+            attach: path.resolve(__dirname, 'src/utils/attach/attach'),
         }
     },
 
     entry: {
-        index: ["/src/js/index", "/src/js/login", "/src/js/listener"],
-        profile: ["/src/js/profile", "/src/js/login", "/src/js/listener"],
-        projects: ["/src/js/projects", "/src/js/login", "/src/js/listener"],
+        index: ["/src/js/index", "/src/js/login"],
+        profile: ["/src/js/profile", "/src/js/login"],
+        projects: ["/src/js/projects", "/src/js/login"],
         register: ["/src/js/register"],
     },
-    //Output files to /dist
+    //Output files to dist folder
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "[name].js"
@@ -44,7 +56,10 @@ module.exports = {
         }]
     },
 
-    plugins: [      
+    plugins: [
+        //Load core node_modules
+        //new NodePolyfillPlugin(),
+
         //Generate HTML pages
         new HTMLWebpackPlugin({
             template: 'src/pages/index.html',
@@ -88,7 +103,9 @@ module.exports = {
                 }
             ]
         }),
-    ], 
+    ],
+
+    //target: 'webworker'
 };
-//Add FBROOT to all bundles
-for (const key in module.exports.entry) module.exports.entry[key].push('/src/js/init-fb');
+//Add init.js to all bundles
+for (const key in module.exports.entry) module.exports.entry[key].push('/src/js/init');

@@ -6,18 +6,20 @@
     "author": "Neel Patel",
     "license": "ISC",
     "scripts": {
-        "start": "PORT=8000 concurrently \"npm:dev\" \"npm:watch \"",
-        "dev": "webpack-dev-server",
+        "start": "PORT=8000 concurrently \"npm:dev\" \"npm:watch\"",
+        "postclone": "npm i && npm start",
+        "dev": "serve dist",
         "build": "webpack",
-        "watch": "nodemon --delay 1"
+        "watch": "nodemon"
     },
     "nodemonConfig": {
         "watch": [
-            "src/"
+            "./src/**/*"
         ],
+        "ext": "html js css",
         "exec": "npm run build && clear"
     },
-    
+
     "bugs": {
         "url": "https://github.com/Aspect-6/Artisticolor/issues"
     },
@@ -26,17 +28,21 @@
         "type": "git",
         "url": "git+https://github.com/Aspect-6/Artisticolor.git"
     },
-    
     "dependencies": {
+        "browser-fs-access": "^0.33.1",
+        "browserify-fs": "^1.0.0",
         "crypto-js": "^4.1.1",
-        "firebase": "^9.19.1"
+        "firebase": "^9.19.1",
+        "path-browserify": "^1.0.1"
     },
     "devDependencies": {
         "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^6.7.3",
         "html-webpack-plugin": "^5.5.1",
         "mini-css-extract-plugin": "^2.7.5",
+        "node-polyfill-webpack-plugin": "^2.0.1",
         "nodemon": "^2.0.22",
+        "serve": "^14.2.0",
         "webpack": "^5.82.0",
         "webpack-cli": "^5.0.2",
         "webpack-dev-server": "^4.13.3"

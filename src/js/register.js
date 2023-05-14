@@ -1,20 +1,19 @@
-require('./init-fb').init();
-const createUser = require('../utils/user/createUser')
+require('./init').init();
 
 //Show register box
-document.getElementById('login-box').style.transition = '0s';
-document.getElementById('login-box').style.transform = 'scale(1)';
-document.getElementById('login-box').style.top = '0px';
+getElement('login-box').style.transition = '0s';
+getElement('login-box').style.transform = 'scale(1)';
+getElement('login-box').style.top = '0px';
 
-document.getElementById('submit').addEventListener('click', function() {
-	
-	//Get email, username, & password boxes
-	const email = document.getElementById('email');
-	const username = document.getElementById('username');
-	const password = document.getElementById('password');
+//Get email, username, & password boxes
+const email = getElement('email');
+const username = getElement('username');
+const password = getElement('password');
+
+getElement('submit').addEventListener('click', () => {
 
 	//Get message element
-	const message = document.getElementById('message');
+	const message = getElement('message');
 
 	//Check for blank inputs
 	if(email.value == '' || username.value == '' || password.value == '') return;
@@ -26,45 +25,13 @@ document.getElementById('submit').addEventListener('click', function() {
 	}	
 
 	//Create a user and add user to database
-	createUser(auth, email, username, password);
+	require('utils/user/createUser')(auth, email, username, password)
 
 });
 
 //Move the label up when the input box is selected
-document.getElementById('email').addEventListener('focus', () => {
-    document.getElementById('emailLabel').style.transform = 'translateY(-200%)';
-    document.getElementById('emailLabel').style.transition = '0.25s';
-    
-	if(document.getElementById('username').value == '') {
-        document.getElementById('usernameLabel').style.transform = 'translateY(-50%)';
-    }
-	if(document.getElementById('password').value == '') {
-        document.getElementById('passwordLabel').style.transform = 'translateY(-50%)';
-    }  
-});
-document.getElementById('username').addEventListener('focus', () => {
-    document.getElementById('usernameLabel').style.transform = 'translateY(-200%)';
-    document.getElementById('usernameLabel').style.transition = '0.25s';
-	
-	if(document.getElementById('email').value == '') {
-        document.getElementById('emailLabel').style.transform = 'translateY(-50%)';
-    }
-	if(document.getElementById('password').value == '') {
-        document.getElementById('passwordLabel').style.transform = 'translateY(-50%)';
-    }  
-});
-document.getElementById('password').addEventListener('focus', () => {
-    document.getElementById('passwordLabel').style.transform = 'translateY(-200%)';
-    document.getElementById('passwordLabel').style.transition = '0.25s';
-    
-	if(document.getElementById('email').value == '') {
-        document.getElementById('emailLabel').style.transform = 'translateY(-50%)';
-    }
-	if(document.getElementById('username').value == '') {
-        document.getElementById('usernameLabel').style.transform = 'translateY(-50%)';
-    }
-});
+require('utils/anim/register/box').addListeners()
 
 //Load styles
-const register = require('../assets/styles/register.css'),
-	lgnregBox = require('../assets/styles/lgnregBox.css')
+const register = require('styles/register.css'),
+	lgnregBox = require('styles/lgnregBox.css')

@@ -3,8 +3,7 @@ module.exports = function createUser(auth, email, username, password) {
         
         const user = userCredential.user;
         
-        const randomKey = require('../crypto/randomKey');
-        const KEY = randomKey();
+        const KEY = require('../crypto/randomKey')();
 
         //Encrypt user data
         const encryptedData = require('../crypto/encrypt')([
@@ -34,11 +33,15 @@ module.exports = function createUser(auth, email, username, password) {
         
         if(errorcode == 'auth/invalid-email') {
             message.innerHTML = 'Please enter a valid email';
-
-            email.classList.add('error');
-            setTimeout(email.classList.remove('error'), 500);
+            require('error/shake')(email)
         }
-        if(errorcode == 'auth/email-already-in-use') message.innerHTML = 'Email is currently in use'
-        if(errorcode == 'auth/weak-password') message.innerHTML = 'Password should be at least 6 characters'
-    })
+        if(errorcode == 'auth/email-already-in-use') {
+            message.innerHTML = 'Email is currently in use'
+            require('error/shake')(email)
+        }
+        if(errorcode == 'auth/weak-password') {
+            message.innerHTML = 'Password should be at least 6 characters'
+            require('error/shake')(password)
+        }
+    });
 };

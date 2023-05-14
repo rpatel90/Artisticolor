@@ -1,4 +1,4 @@
-require('./init-fb').init();
+require('./init').init();
 
 
 
