@@ -12,7 +12,7 @@ onAuthStateChanged(auth, (user) => {
                 (await get(ref(db, `Users/${user.uid}/Key`))).val()
             ]
         }
-
+        
         //Decrypt user password
         const decryptPassword = getPassword()
             .then((data) => {return require('utils/crypto/decrypt')(data[0], data[1])});
