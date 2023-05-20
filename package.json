@@ -6,9 +6,9 @@
     "author": "Neel Patel",
     "license": "ISC",
     "scripts": {
-        "start": "PORT=8000 concurrently \"npm:dev\" \"npm:watch\"",
+        "start": "concurrently \"npm:dev\" \"npm:watch\"",
         "postclone": "npm i && npm start",
-        "dev": "serve dist",
+        "dev": "PORT=8000 serve dist",
         "build": "webpack",
         "watch": "nodemon"
     },
