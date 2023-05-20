@@ -4,35 +4,19 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 
 module.exports = {
 
     mode: 'development',
 
-    // devServer: {
-    //     static: 'dist',
-    //     client: { logging: 'error' },
-    //     compress: true,
-    //     port: 8000,
-    // },
-    
-
-
-    resolve: {
-        fallback: {
-            //fs: require.resolve('browserify-fs'),
-            //path: require.resolve('path-browserify')
-        },
-        alias: {
+    resolve: { alias: {
             js: path.resolve(__dirname, 'src/js'),
             styles: path.resolve(__dirname, 'src/assets/styles'),
             utils: path.resolve(__dirname, 'src/utils'),
             anim: path.resolve(__dirname, 'src/utils/anim'),
             error: path.resolve(__dirname, 'src/utils/anim/error'),
-            attach: path.resolve(__dirname, 'src/utils/attach/attach'),
-        }
-    },
+            database: path.resolve(__dirname, 'src/utils/firebase')
+    }},
 
     entry: {
         index: ["/src/js/index", "/src/js/login"],
@@ -57,9 +41,6 @@ module.exports = {
     },
 
     plugins: [
-        //Load core node_modules
-        //new NodePolyfillPlugin(),
-
         //Generate HTML pages
         new HTMLWebpackPlugin({
             template: 'src/pages/index.html',

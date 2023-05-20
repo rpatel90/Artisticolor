@@ -19,7 +19,6 @@
         "ext": "html js css",
         "exec": "npm run build && clear"
     },
-
     "bugs": {
         "url": "https://github.com/Aspect-6/Artisticolor/issues"
     },
@@ -29,22 +28,19 @@
         "url": "git+https://github.com/Aspect-6/Artisticolor.git"
     },
     "dependencies": {
-        "browser-fs-access": "^0.33.1",
-        "browserify-fs": "^1.0.0",
-        "crypto-js": "^4.1.1",
-        "firebase": "^9.19.1",
-        "path-browserify": "^1.0.1"
+        "@firebase/app": "^0.9.10",
+        "@firebase/auth": "^0.23.2",
+        "@firebase/database": "^0.14.4",
+        "crypto-js": "^4.1.1"
     },
     "devDependencies": {
         "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^6.7.3",
         "html-webpack-plugin": "^5.5.1",
         "mini-css-extract-plugin": "^2.7.5",
-        "node-polyfill-webpack-plugin": "^2.0.1",
         "nodemon": "^2.0.22",
         "serve": "^14.2.0",
         "webpack": "^5.82.0",
-        "webpack-cli": "^5.0.2",
-        "webpack-dev-server": "^4.13.3"
+        "webpack-cli": "^5.0.2"
     }
 }

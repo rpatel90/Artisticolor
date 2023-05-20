@@ -1,4 +1,4 @@
-module.exports = function createUser(auth, email, username, password) {
+module.exports = function(auth, email, username, password) {
     createUserWithEmailAndPassword(auth, email.value, password.value).then((userCredential) => {
         
         const user = userCredential.user;
