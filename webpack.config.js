@@ -10,12 +10,12 @@ module.exports = {
     mode: 'development',
 
     resolve: { alias: {
-            js: path.resolve(__dirname, 'src/js'),
-            styles: path.resolve(__dirname, 'src/assets/styles'),
-            utils: path.resolve(__dirname, 'src/utils'),
-            anim: path.resolve(__dirname, 'src/utils/anim'),
-            error: path.resolve(__dirname, 'src/utils/anim/error'),
-            database: path.resolve(__dirname, 'src/utils/firebase')
+        js: path.resolve(__dirname, 'src/js'),
+        styles: path.resolve(__dirname, 'src/assets/styles'),
+        utils: path.resolve(__dirname, 'src/utils'),
+        anim: path.resolve(__dirname, 'src/utils/anim'),
+        error: path.resolve(__dirname, 'src/utils/anim/error'),
+        firebasedb: path.resolve(__dirname, 'src/utils/firebase')
     }},
 
     entry: {

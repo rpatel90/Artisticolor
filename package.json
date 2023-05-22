@@ -7,7 +7,6 @@
     "license": "ISC",
     "scripts": {
         "start": "concurrently \"npm:dev\" \"npm:watch\"",
-        "postclone": "npm i && npm start",
         "dev": "PORT=8000 serve dist",
         "build": "webpack",
         "watch": "nodemon"
