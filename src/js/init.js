@@ -1,5 +1,5 @@
 module.exports = {
-    ...require('firebasedb/init'),    
+    ...require('firebasedb/exports'),    
 
     //Shorten code
     getElement: require('utils/shorten/getElement'),

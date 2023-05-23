@@ -85,8 +85,6 @@ module.exports = {
             ]
         }),
     ],
-
-    //target: 'webworker'
 };
 //Add init.js to all bundles
-for (const key in module.exports.entry) module.exports.entry[key].push('/src/js/init');
+for (const key in module.exports.entry) module.exports.entry[key].push('./src/js/init');

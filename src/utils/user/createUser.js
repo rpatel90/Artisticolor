@@ -27,7 +27,7 @@ module.exports = function(auth, email, username, password) {
         });
 
         //Redirect
-        location.href = '/'
+        location.href = './profile.html'
     }).catch((error) => {
         const errorcode = error.code
         

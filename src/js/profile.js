@@ -2,20 +2,12 @@ require('./init').init();
 
 onAuthStateChanged(auth, (user) => {
     if(user) { //User is logged in
-        //Detect and signout user from account
+        //Detect and sign out user from account
         require('utils/user/signOutUser')
         
-        //Get and return user password and decryption key from database
-        async function getPassword() {
-            return [
-                (await get(ref(db, `Users/${user.uid}/Password`))).val(),
-                (await get(ref(db, `Users/${user.uid}/Key`))).val()
-            ]
-        }
-        
         //Decrypt user password
-        const decryptPassword = getPassword()
-            .then((data) => {return require('utils/crypto/decrypt')(data[0], data[1])});
+        const decryptPassword = require('firebasedb/getData')(user.uid)
+            .then(data => {return require('utils/crypto/decrypt')(data[0], data[1])});
         
         decryptPassword.then(pwd => getElement('Passwd').value = pwd );
         
@@ -23,7 +15,7 @@ onAuthStateChanged(auth, (user) => {
         const imgEl = document.createElement('img');
         imgEl.setAttribute('id', 'profilePhoto');
         imgEl.setAttribute('src', user.photoURL);
-        getElement('header').appendChild(imgEl);
+        getElement('header').appendChild(imgEl); 
 
         //Display username and email
         getElement('Email').value = user.email;
@@ -32,12 +24,13 @@ onAuthStateChanged(auth, (user) => {
         //Get password icon element
         const pd = getElement('pdIcon');
 
-        //Create a div to cover the page when user is prompted to enter password
+        //Create div to cover the page when user is prompted to enter password
         const coverDiv = document.createElement('div');
 
         //Set coverDiv id to "cover"
         coverDiv.setAttribute('id', 'cover');
         coverDiv.setAttribute('class', 'promptClose');
+        coverDiv.style.position = 'fixed'
 
         //Add event listener to password icon
         pd.addEventListener('click', () => {
@@ -60,15 +53,13 @@ onAuthStateChanged(auth, (user) => {
                     e.preventDefault();
                     require('utils/confirm/confirmPassword')(decryptPassword, pd, coverDiv)
                 });
+            } else { //If eye image is open, change to closed and hide password
+                pd.setAttribute('src', './icons/closedEye.png');
+                getElement('Passwd').setAttribute('type', 'password');
+                return;
             }
-            setTimeout(() => {
-                //If eye image is open, change to closed and hide password
-                if(pd.src == 'http://localhost:8000/icons/openEye.png') {
-                    pd.setAttribute('src', '../icons/closedEye.png');
-                    getElement('Passwd').setAttribute('type', 'password')
-                    return;
-                }
-            }, 100)
+
+            
         });
     } else { //No user
         //Shorten the size of userData box
@@ -76,7 +67,5 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-//Load styles
-const lgnregBox = require('styles/lgnregBox.css'),
-    nav = require('styles/nav.css'),
-    profile = require('styles/profile.css')
+// Load styles
+require('styles/lgnregBox.css'), require('styles/profile.css'), require('styles/nav.css')

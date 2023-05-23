@@ -3,6 +3,4 @@ require('./init').init();
 
 
 //Load styles
-const home = require('styles/home.css'),
-    lgnregBox = require('styles/lgnregBox.css'),
-    nav = require('styles/nav.css')
+require('styles/index.css'), require('styles/lgnregBox.css'), require('styles/nav.css')
