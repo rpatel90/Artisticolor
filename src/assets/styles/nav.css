@@ -12,9 +12,6 @@ body {
     min-height: 100vh;
     background: #d0d2db;
 }
-body::-webkit-scrollbar {
-    display: none;
-}
 
 #logo {
     height: 100px;
@@ -51,6 +48,9 @@ header {
     justify-content: space-between;
     align-items: center;
     z-index: 2;
+}
+header::-webkit-scrollbar {
+    display: none;
 }
 
 @media screen and (min-width: 794px) {
