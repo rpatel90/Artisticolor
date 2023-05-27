@@ -64,8 +64,8 @@ onAuthStateChanged(auth, (user) => {
     } else { //No user
         //Shorten the size of userData box
         getElement('userData').style.height = 'calc(400 / 800 * 100%)';
-    }
+   }
 });
 
 // Load styles
-require('styles/lgnregBox.css'), require('styles/profile.css'), require('styles/nav.css')
+require('styles/lgnregBox.scss'), require('styles/profile.scss'), require('styles/nav.scss')

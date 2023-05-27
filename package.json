@@ -15,7 +15,7 @@
         "watch": [
             "./src/**/*"
         ],
-        "ext": "html js css",
+        "ext": "html js css scss",
         "exec": "npm run build && clear"
     },
     "bugs": {
@@ -38,8 +38,10 @@
         "html-webpack-plugin": "^5.5.1",
         "mini-css-extract-plugin": "^2.7.5",
         "nodemon": "^2.0.22",
+        "sass": "^1.62.1",
+        "sass-loader": "^13.3.0",
         "serve": "^14.2.0",
-        "webpack": "^5.82.0",
+        "webpack": "^5.84.1",
         "webpack-cli": "^5.0.2"
     }
 }

@@ -1,14 +1,10 @@
-:root {
-    --navTextColor: #4076ff;
-}
+$navTextColor: #4076ff;
 
 * {
     box-sizing: border-box;
     font-family: sans-serif;
 }
 body {
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     background: #d0d2db;
 }
@@ -21,7 +17,7 @@ body {
     display: flex;
 }
 .webname {
-    color: var(--navTextColor);
+    color: $navTextColor;
     position: relative;
     top: 5px;
     right: 20px;
@@ -30,7 +26,7 @@ body {
 .userDisplay {
     position: relative;
     font-size: larger;
-    color: var(--navTextColor);
+    color: $navTextColor;
     text-decoration: none;
     margin-left: 40px;
     padding-bottom: 20px;
@@ -48,9 +44,9 @@ header {
     justify-content: space-between;
     align-items: center;
     z-index: 2;
-}
-header::-webkit-scrollbar {
-    display: none;
+    ::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 @media screen and (min-width: 794px) {
@@ -62,29 +58,29 @@ header::-webkit-scrollbar {
 .nava {
     position: relative;
     font-size: larger;
-    color: var(--navTextColor);
+    color: $navTextColor;
     text-decoration: none;
     margin-left: 50px;
     padding-bottom: 20px;
-}
-.nava::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    border-bottom: 3px solid #0037ff;
-    border-radius: 5px;
-    left: 0;
-    bottom: 15px;
-    transform: scaleX(0);
-    transition: 0.2s;
-    text-decoration: underline;
-}
-.nava:hover:after {
-    transform: scaleX(1);
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        border-bottom: 3px solid #0037ff;
+        border-radius: 5px;
+        left: 0;
+        bottom: 15px;
+        transform: scaleX(0);
+        transition: 0.2s;
+        text-decoration: underline;
+    }
+    &:hover:after {
+        transform: scaleX(1);
+    }
 }
 
-.btnLogin {  
+.btnLogin {
     width: 130px;
     height: 50px;
     background: transparent;
@@ -96,10 +92,11 @@ header::-webkit-scrollbar {
     color: #4D6CFA;
     margin-left: 40px;
     transition: 0.3s;
+    &:hover {
+        background: #B8B8FF;
+    }
 }
-.btnLogin:hover {
-    background: #B8B8FF;
-}
+
 #dropdown-arrow {
     margin-left: 5px;
     vertical-align: middle;
@@ -117,37 +114,47 @@ header::-webkit-scrollbar {
     transition: 0.2s;
     z-index: 1;
 }
- 
-#displayName:hover .sub-menu-wrap {
-    display: block;    
+
+#displayName {
+    &:hover {
+        .sub-menu-wrap {
+            display: block;    
+        }
+    }
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    h3 {
+        font-weight: 500;
+        margin-left: 10px;
+    }
+    img {
+        width: 50px;
+        border-radius: 50%;
+    }
 }
 
 .sub-menu {
     padding: 20px;
 }
-.user-info {
-    display: flex;
-    align-items: center;
-}
-.user-info h3 {
-    font-weight: 500;
-    margin-left: 10px;
-}
-.user-info img {
-    width: 50px;
-    border-radius: 50%;
-}
 .sub-menu-link {
     display: flex;
     align-items: center;
     text-decoration: none;
-}
-.sub-menu-link p {
-    width: 100%;
-    margin: 13px 0;
-    margin-left: 15px;
-    font-size: 18px;
-    color: #555555;
+    p {
+        width: 100%;
+        margin: 13px 0;
+        margin-left: 15px;
+        font-size: 18px;
+        color: #555555;
+    }
+    &:hover {
+        p {
+            font-weight: 550;
+        }
+    }
 }
 .right-arrow {
     margin-right: 5px;
@@ -155,22 +162,17 @@ header::-webkit-scrollbar {
     width: 35px;
     transition: 0.5s;
 }
-.sub-menu-link:hover p {
-    font-weight: 550;
-}
 
 #dropdown-arrow {
     width: 17px;
 }
 
-#menu-item-1:hover #menu-img-1 {
-    transform: translateX(3px);
-}
-#menu-item-2:hover #menu-img-2 {
-    transform: translateX(3px);
-}
-#menu-item-3:hover #menu-img-3 {
-    transform: translateX(3px);
+@for $i from 1 through 3 {
+    #menu-item-#{$i}:hover {
+        #menu-img-#{$i} {
+            transform: translateX(3px);
+        }
+    }
 }
 
 #close {
@@ -181,10 +183,11 @@ header::-webkit-scrollbar {
     border: none;
     transform: scale(0.9);
     transition: 0.5s;
+    &:hover {
+        transform: scale(1);
+    }
 }
-#close:hover {
-    transform: scale(1);
-}
+
 #userIcon {
     position: absolute;
     top: 36px;

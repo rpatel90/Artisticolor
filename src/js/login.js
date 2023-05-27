@@ -4,8 +4,6 @@ onAuthStateChanged(auth, (user) => {
     if(user) {
         console.log(user);
 
-        user.photoURL = 'localhost:8000/icons/usercon.png';
-
         //Create element to display user username
         const aElement = document.createElement('a');
         aElement.setAttribute('id', 'displayName');
@@ -64,3 +62,5 @@ onAuthStateChanged(auth, (user) => {
 });
 
 require('anim/login/box').addListeners()
+//Load Styles
+require('styles/lgnregBox.scss')

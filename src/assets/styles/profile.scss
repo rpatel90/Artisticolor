@@ -1,7 +1,5 @@
-:root {
-    --accBoxHeight: 550;
-    --accBoxHeightPx: 500px;
-}
+$accBoxHeight: 500px;
+
 h1 {
     color: rgba(175, 0, 215, 0.751);
 }
@@ -15,8 +13,6 @@ body {
 }
 
 .accountBox {
-    align-items: center;
-    justify-content: center;
     text-align: center;
     position: fixed;
     top: max(50%, 425px);
@@ -24,8 +20,8 @@ body {
     transform: translate(-50%, -50%);
     background: linear-gradient(45deg, #dbdbdb, #DCCFEC);
     width: 500px;
-    min-height: var(--accBoxHeightPx);
-    max-height: var(--accBoxHeightPx);
+    min-height: $accBoxHeight;
+    max-height: $accBoxHeight;
     border-radius: 20px;
     padding: 10px;
     z-index: 1;
@@ -33,17 +29,23 @@ body {
 
 .dataElements {
     position: relative;
-    margin-top: calc(40 / var(--accBoxHeight) * 100%);
+    margin-top: 35px;
     font-size: large;
     text-align: center;
     background-color: lightgray;
     border: none;
     border-bottom: rgb(183, 161, 101) solid 3px;
     background: transparent;
+    &:focus {
+        outline: none;
+    }
 }
-.dataElements:focus {
-    outline: none;
+
+.labels {
+    color: #4C5454;
+    font-size: larger;
 }
+
 .wraps {
     width: 100%;
     position: relative;
@@ -74,11 +76,6 @@ body {
     opacity: 0.4;
 }
 
-.labels {
-    color: #4C5454;
-    font-size: larger;
-}
-
 #logout {
     margin-top: 40px;
     width: 120px;
@@ -96,11 +93,10 @@ body {
     transform: scale(1);
     transition: 0.3s;
 }
-#pdIcon:hover {
-    transform: scale(1.2);
-}
-#pdIcon:hover::after {
-    transform: scale(1);
+#pdIcon {
+    &:hover {
+        transform: scale(1.2);
+    }
 }
 
 #passwordPromptDiv {
@@ -143,10 +139,9 @@ body {
     height: 15px;
     transition: 0.1s;
     transform: scale(1);
-}
-#passwordCloseImg:hover {
-    height: 15px;
-    transform: scale(1.1);
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 #promptButton {
@@ -157,10 +152,7 @@ body {
     background: lightgray;
     transition: 0.1s;
     border: 1px solid black;
-}
-#promptButton:hover {
-    background-color: rgb(186, 186, 186);
-}
-#promptButton:hover:after {
-    background: lightgray;
+    &:hover {
+        background: #bababa;
+    }
 }

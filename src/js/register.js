@@ -33,5 +33,4 @@ getElement('submit').addEventListener('click', () => {
 require('utils/anim/register/box').addListeners()
 
 //Load styles
-const register = require('styles/register.css'),
-	lgnregBox = require('styles/lgnregBox.css')
+require('styles/register.scss'), require('styles/lgnregBox.scss')

@@ -30,7 +30,7 @@
     margin: auto;
 }
 
-#p {
+#message {
     font-size: 24px;
     text-align: left;
     line-height: 100px;
@@ -45,11 +45,10 @@
     width: 50px;
     transform: scale(1);
     transition: 0.3s;
+    &:hover {
+        transform: scale(1.1);
+    }
 }
-#createNew:hover {
-    transform: scale(1.1);
-}
-
 #makeProjectBtn {
     background: transparent;
     border: none;

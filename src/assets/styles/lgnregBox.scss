@@ -15,14 +15,48 @@
     bottom: 0;
     margin: auto;
     z-index: 2;
+
+    h1 {
+        color: rgb(150, 40, 240);
+        font-size: 35px;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+    [type='submit'] {
+        border: 0;
+        background: lightgray;
+        display: block;
+        margin: 40px auto;
+        margin-top: 20px;
+        text-align: center;
+        font-size: large;
+        border: 3px solid lightslategray;
+        padding: 5px 15px;
+        outline: none;
+        border-radius: 24px;
+        transition: 0.25px;
+        cursor: pointer;
+    }
+    [type='submit']:hover {
+        background: rgb(185, 185, 185);
+        transition: 0.2s;
+    }
+    label {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: rgb(78, 0, 150);
+    }
+
+    input:-webkit-autofill {
+        border: 1px solid none;
+        -webkit-text-fill-color: black;
+        transition: background-color 5000s ease-in-out 0s;
+    }
 }
 
-#login-box h1 {
-    color: rgb(150, 40, 240);
-    font-size: 35px;
-    text-transform: uppercase;
-    font-weight: 700;
-}
 #email, #username, #password {
     background: transparent;
     font-size: large;
@@ -34,39 +68,6 @@
     border-bottom: 3px solid gray;
     margin: 15px auto;
 }
-#login-box [type='submit'] {
-    border: 0;
-    background: lightgray;
-    display: block;
-    margin: 40px auto;
-    margin-top: 20px;
-    text-align: center;
-    font-size: large;
-    border: 3px solid lightslategray;
-    padding: 5px 15px;
-    outline: none;
-    border-radius: 24px;
-    transition: 0.25px;
-    cursor: pointer;
-}
-#login-box [type='submit']:hover {
-    background: rgb(185, 185, 185);
-    transition: 0.2s;
-}
-#login-box label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: rgb(78, 0, 150);
-}
-#login-box input:-webkit-autofill {
-    border: 1px solid none;
-    -webkit-text-fill-color: black;
-    transition: background-color 5000s ease-in-out 0s;
-}
-
 #message {
     margin-top: 0px;
     color: rgb(234, 3, 3);
