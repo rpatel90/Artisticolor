@@ -13,9 +13,10 @@
     },
     "nodemonConfig": {
         "watch": [
-            "./src/**/*"
+            "./src"
         ],
-        "ext": "html js css scss",
+        "ignore": "./src/tests/",
+        "ext": "html js scss",
         "exec": "npm run build && clear"
     },
     "bugs": {

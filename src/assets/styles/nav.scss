@@ -102,19 +102,6 @@ header {
     vertical-align: middle;
 }
 
-.sub-menu-wrap {
-    position: absolute;
-    display: none;
-    top: 95%;
-    right: -100%;
-    width: 200px;
-    padding: 10px;
-    margin: 10px;
-    background: #FFF;
-    transition: 0.2s;
-    z-index: 1;
-}
-
 #displayName {
     &:hover {
         .sub-menu-wrap {
@@ -156,6 +143,19 @@ header {
         }
     }
 }
+.sub-menu-wrap {
+    position: absolute;
+    display: none;
+    top: 80%;
+    right: -83%;
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    background: #f0efef;
+    transition: 0.2s ease-in-out;
+    z-index: 1;
+}
+
 .right-arrow {
     margin-right: 5px;
     height: 21px;
@@ -168,10 +168,8 @@ header {
 }
 
 @for $i from 1 through 3 {
-    #menu-item-#{$i}:hover {
-        #menu-img-#{$i} {
-            transform: translateX(3px);
-        }
+    #menu-item-#{$i}:hover #menu-img-#{$i} {
+        transform: translateX(3px);
     }
 }
 

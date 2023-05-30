@@ -1,9 +1,10 @@
 const path = require('path');
+const { readdirSync: readdir } = require('fs')
 
-//Webpack Plugins
-const HTMLWebpackPlugin = require('html-webpack-plugin');
+//Plugins
+const HTMLPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 
@@ -13,88 +14,54 @@ module.exports = {
         js: path.resolve(__dirname, 'src/js'),
         styles: path.resolve(__dirname, 'src/assets/styles'),
         utils: path.resolve(__dirname, 'src/utils'),
+        lib: path.resolve(__dirname, 'src/lib'),
         anim: path.resolve(__dirname, 'src/utils/anim'),
         error: path.resolve(__dirname, 'src/utils/anim/error'),
         firebasedb: path.resolve(__dirname, 'src/utils/firebase')
     }},
 
     entry: {
-        index: ["/src/js/index", "/src/js/login"],
-        profile: ["/src/js/profile", "/src/js/login"],
-        projects: ["/src/js/projects", "/src/js/login"],
-        register: ["/src/js/register"],
+        index: ['./src/js/index', './src/js/login', './src/js/init'],
+        profile: ['./src/js/profile', './src/js/login', './src/js/init'],
+        projects: ['./src/js/projects', './src/js/login', './src/js/init'],
+        register: ['./src/js/register'],
     },
-    //Output files to dist folder
+    //Output files to a dist folder
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "[name].js"
     },
 
-    module: {
-        rules: [
-            {
-                test:/\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                ]
-            },
-            {
-                test: /\.s[ac]ss$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    "sass-loader",
-                ],
-            }
+    module: { rules: [{
+        test:/\.s[ac]ss$/,
+        use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            'sass-loader'
         ]
-    },
+    }]},
 
     plugins: [
-        //Generate HTML pages
-        new HTMLWebpackPlugin({
-            template: 'src/pages/index.html',
+        //Add HTML files
+        ...readdir('src/pages').map(file => file.split('.')[0]).map(file => new HTMLPlugin({
+            template: `src/pages/${file}.html`,
             inject: true,
-            chunks: ['index'],
-            filename: 'index.html',
-        }),
-        new HTMLWebpackPlugin({
-            template: 'src/pages/profile.html',
-            inject: true,
-            chunks: ['profile'],
-            filename: 'profile.html',
-        }),
-        new HTMLWebpackPlugin({
-            template: 'src/pages/projects.html',
-            inject: true,
-            chunks: ['projects'],
-            filename: 'projects.html',
-        }),
-        new HTMLWebpackPlugin({
-            template: 'src/pages/register.html',
-            inject: true,
-            chunks: ['register'],
-            filename: 'register.html',
-        }),
-        
+            chunks: [file],
+            filename: `${file}.html`,
+        })),
         //Generate CSS files
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].css'
-        }),
-
+        new MiniCssExtractPlugin({ filename: '[name].css' }),
         //Copy images and icons
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: 'src/assets/',
-                    globOptions: {
-                        ignore: ['**/styles']
-                    },
-                }
-            ]
+        new CopyPlugin({
+            patterns: [{
+                from: 'src/assets/',
+                globOptions: {
+                    ignore: ['**/styles']
+                },
+            },
+            {
+                from: 'src/lib'
+            }]
         }),
     ],
 };
-//Add init.js to all bundles
-for (const key in module.exports.entry) module.exports.entry[key].push('./src/js/init');
