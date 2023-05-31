@@ -146,13 +146,13 @@ header {
 .sub-menu-wrap {
     position: absolute;
     display: none;
-    top: 80%;
+    top: 79%;
     right: -83%;
     width: 200px;
     padding: 10px;
     margin: 10px;
     background: #f0efef;
-    transition: 0.2s ease-in-out;
+    border: 2px solid rgb(0, 0, 0);
     z-index: 1;
 }
 
